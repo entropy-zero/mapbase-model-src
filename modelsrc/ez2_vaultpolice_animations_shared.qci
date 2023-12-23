@@ -1,0 +1,114 @@
+
+// ----------------------------------------------------------------
+// Swap the readiness animation activities
+// ----------------------------------------------------------------
+
+// AR2
+$append "ar2angryidle1" { activity "ACT_IDLE_AIM_AR2_STIMULATED" 1 }
+$append "ar2angryidle2" { activity "ACT_IDLE_ANGRY_AR2" 1 }
+$append "shoot_ar2" { activity "ACT_RANGE_ATTACK_AR2_STIMULATED" 1 }
+$GenericShootFromIdle "shoot_ar2_fromchest" "police_animations_anims\custom\ar2angryidle2.smd" "ACT_RANGE_ATTACK_AR2" "soldier_Aim_9_directions" "gesture_shoot_smg1" 3
+
+$append "run_aiming_ar2_all" { activity "ACT_RUN_AIM_AR2_STIMULATED" 1 }
+$append "walk_aiming_ar2_all" { activity "ACT_WALK_AIM_AR2_STIMULATED" 1 }
+
+$append "run_aiming_stimulated_AR2_all" { activity "ACT_RUN_AIM_AR2" 1 }
+$append "walk_aiming_stimulated_AR2_all" { activity "ACT_WALK_AIM_AR2" 1 }
+
+// SMG1
+$GenericCombatIdle "smg1angryidle1" "police_animations_anims\smg1angryidle1.smd" "ACT_IDLE_AIM_RIFLE_STIMULATED" "soldier_Aim_9_directions"
+$append "smg1angryidle2" { activity "ACT_IDLE_ANGRY_SMG1" 1 }
+$GenericShoot "shoot_smg1" "police_animations_anims\shoot_smg1.smd" "ACT_RANGE_ATTACK_SMG1_STIMULATED" "soldier_Aim_9_directions"
+$GenericShootFromIdle "shoot_smg1_fromchest" "police_animations_anims\custom\smg1angryidle2.smd" "ACT_RANGE_ATTACK_SMG1" "soldier_Aim_9_directions" "gesture_shoot_smg1" 3
+
+$sequence "run_aiming_smg1_all" { $a_RunBlends activity "ACT_RUN_AIM_RIFLE_STIMULATED" 1 addlayer "layer_run_aiming_smg1" }
+$sequence "walk_aiming_smg1_all" { $a_WalkBlends activity "ACT_WALK_AIM_RIFLE_STIMULATED" 1 addlayer "layer_walk_aiming_smg1" }
+
+$append "run_aiming_stimulated_SMG1_all" { activity "ACT_RUN_AIM_SMG1" 1 }
+$append "walk_aiming_stimulated_SMG1_all" { activity "ACT_WALK_AIM_SMG1" 1 }
+
+// Shotgun
+
+
+// ----------------------------------------------------------------
+// New animations to look like the readiness activities
+// ----------------------------------------------------------------
+
+$GenericReload "reload_smg1" "police_animations_anims\reload_smg1.smd" "ACT_RELOAD_SMG1_STIMULATED" "SMG1_Aim_all" 10 35 50 49 node "shooting_smg"
+
+$GenericReloadFromIdle "reload_smg1_fromchest" "police_animations_anims\custom\smg1angryidle2.smd" "ACT_RELOAD_SMG1" "soldier_Aim_9_directions" "gesture_reload_smg1" 10 35 50 49 node "shooting_smg"
+
+// ----------------------------------------------------------------
+// Pulse pistol activities
+// ----------------------------------------------------------------
+
+$sequence "ez2_pulstol_charge" {
+	"ez2_vaultpolice_animations\ez2_pulstol_charge.smd"
+	{ event AE_CL_PLAYSOUND 0 "Weapon_PulsePistol.NPC_Charge" }
+	{ event COMBINE_AE_ALTFIRE 50 "" }
+	addlayer "pistol_Aim_all"
+	activity "ACT_CHARGE_PULSE_PISTOL" 1
+	cmdlist lockfeetandlefthand
+}
+
+$sequence "g_ez2_pulstol_charge" "ez2_vaultpolice_animations\ez2_pulstol_charge.smd" activity "ACT_GESTURE_CHARGE_PULSE_PISTOL" 1 {
+	subtract "g_ez2_pulstol_charge" 0 delta
+//$makeweapongesture "g_ez2_pulstol_charge" "ez2_vaultpolice_animations\ez2_pulstol_charge.smd" 10 50 55 activity "ACT_GESTURE_CHARGE_PULSE_PISTOL" 1 {
+	{ event AE_CL_PLAYSOUND 0 "Weapon_PulsePistol.NPC_Charge" }
+	{ event COMBINE_AE_ALTFIRE 50 "" }
+	{ event AE_NPC_MUZZLEFLASH 50 "COMBINE MUZZLE" }
+	//ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesequence
+}
+
+$GenericReload "ez2_pulstol_reload" "ez2_vaultpolice_animations\ez2_pulstol_reload.smd" "ACT_RELOAD_PULSE_PISTOL" "pistol_Aim_all" 5 25 33 22 {
+	{ event AE_CL_PLAYSOUND 10 "Weapon_PulsePistol.NPC_SlideBack" }
+	{ event AE_CL_PLAYSOUND 18 "Weapon_PulsePistol.NPC_SlideForward" }
+	{ event AE_CL_PLAYSOUND 19 "Weapon_PulsePistol.NPC_Working" }
+	node "shooting_pistol"
+	cmdlist lockfeet
+	ikrule lhand touch "ValveBiped.Bip01_R_Hand" range 0 0 0 5
+	ikrule lhand touch "ValveBiped.Bip01_R_Hand" range 27 33 33 33
+}
+
+$makeweapongesturep "g_ez2_pulstol_reload" "ez2_vaultpolice_animations\ez2_pulstol_reload.smd" 6 23 33 activity "ACT_GESTURE_RELOAD_PULSE_PISTOL" 1 {
+	{ event 3015 29 "" }
+	{ event AE_CL_PLAYSOUND 10 "Weapon_PulsePistol.NPC_SlideBack" }
+	{ event AE_CL_PLAYSOUND 18 "Weapon_PulsePistol.NPC_SlideForward" }
+	{ event AE_CL_PLAYSOUND 19 "Weapon_PulsePistol.NPC_Working" }
+	ikrule lhand release range 0 5 27 32
+	//ikrule lhand touch "ValveBiped.Bip01_R_Hand" range 0 0 0 5
+	//ikrule lhand touch "ValveBiped.Bip01_R_Hand" range 27 32 32 32
+}
+
+// TODO: Make better
+$GenericReloadFromIdle "ez2_pulstol_reload_low" "police_animations_anims\crouch_reload_pistol.smd" "ACT_RELOAD_PULSE_PISTOL_LOW" "soldier_Aim_9_directions" "g_ez2_pulstol_reload" 10 55 65 22 fps 35 node "crouching_pistol" {
+	{ event AE_CL_PLAYSOUND 10 "Weapon_PulsePistol.NPC_SlideBack" }
+	{ event AE_CL_PLAYSOUND 18 "Weapon_PulsePistol.NPC_SlideForward" }
+	{ event AE_CL_PLAYSOUND 19 "Weapon_PulsePistol.NPC_Working" }
+}
+
+// HACKHACK: Remove the crouch aim anims for now
+$append "Crouch_run_aim_smg1_all" { activity "ACT_NULL" 1 }
+$append "Crouch_run_hold_smg1_all" { activity "ACT_NULL" 1 }
+
+// ----------------------------------------------------------------
+// Dynamic interactions
+// ----------------------------------------------------------------
+
+$sequence "vort_v_cop_vorttackle_1" {
+	"ez2_vaultpolice_animations\vort_v_cop_vorttackle_1.dmx"
+	{ event AE_NPC_RESPONSE 13 "TLK_WOUND" }
+	{ event AE_NPC_WEAPON_DROP 18 "" }
+	{ event AE_NPC_RESPONSE 20 "TLK_WOUND" }
+	fps 24
+	angles 90 0 0
+}
+
+// ----------------------------------------------------------------
+// AP scripted
+// ----------------------------------------------------------------
+
+$sequence "ap_idle_handsclasped" "ez2_vaultpolice_animations\ap_idle_handsclasped.dmx" {
+	angles 90 0 0
+	ikrule "lhand" touch "ValveBiped.Bip01_R_Hand"
+}
