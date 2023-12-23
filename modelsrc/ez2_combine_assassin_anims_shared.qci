@@ -1,0 +1,542 @@
+// Created by Crowbar 0.72
+
+$weightlist "NoHead" { "ValveBiped.Bip01_Pelvis" 1 "ValveBiped.Bip01_Head1" 0 }
+
+$sequence "layer_flip_pistol" {
+	"police_animations_anims\layer_run_hold_pistol.smd"
+	hidden
+	loop
+	weightlist "weights_stimulated_aim_2" angles 0 0 90
+}
+
+$sequence "layer_flip_rifle" {
+	"combine_soldier_anims_anims\CombatIdle1.smd"
+	hidden
+	loop
+	weightlist "weights_stimulated_aim_2" angles 0 0 90
+}
+
+$pushd "ez2_combine_assassin_anims" // "../../modelsrc/combine_assassin"
+
+// ----------------------------------------------------------------
+
+$definemacro GenericAssassinShoot SeqName FileName ActName AimLayer \\
+$sequence $SeqName$ { \\
+	$FileName$ \\
+	addlayer $AimLayer$ \\
+	activity $ActName$ 1 \\
+	cmdlist lockfeet \\
+} \\
+
+$definemacro GenericAssassinShootFromIdle SeqName FileName ActName AimLayer GestureLayer NumFrames \\
+$sequence $SeqName$ { \\
+	$FileName$ \\
+	numframes $NumFrames$ \\
+	blendlayer $GestureLayer$ 0 0 0 0 local \\
+	addlayer $AimLayer$ \\
+	activity $ActName$ 1 \\
+	cmdlist lockfeet \\
+} \\
+
+// ----------------------------------------------------------------
+
+$GenericIdle "dualpistol_idle" "dualpistol_idle.smd" "ACT_IDLE_DUAL_PISTOLS" node "standing_dualpistol"
+
+$GenericIdle "dualpistol_idle_relaxed" "dualpistol_idle.smd" "ACT_IDLE_DUAL_PISTOLS_RELAXED" node "standing_dualpistol"
+$GenericIdle "dualpistol_idle_stimulated" "dualpistol_idle_stimulated.smd" "ACT_IDLE_DUAL_PISTOLS_STIMULATED" node "standing_dualpistol_stimulated"
+
+$makeaimlayer "layer_dualpistol_aim_9directions" "dualpistol_idle_aim.smd"
+
+$GenericCombatIdle_NoHandIK "dualpistol_idle_aim" "dualpistol_idle_aim.smd" "ACT_IDLE_ANGRY_DUAL_PISTOLS" "layer_dualpistol_aim_9directions" frame 4 4 node "shooting_dualpistol"
+$GenericCombatIdle_NoHandIK "dualpistol_idle_aim_stimulated" "dualpistol_idle_aim.smd" "ACT_IDLE_AIM_DUAL_PISTOLS_STIMULATED" "layer_dualpistol_aim_9directions" frame 4 4 node "shooting_dualpistol"
+
+$sequence "layer_relaxed_dualpistol" { "dualpistol_idle.smd" weightlist "weights_stimulated_idle_walk" worldspace hidden }
+$sequence "layer_stimulated_dualpistol" { "dualpistol_idle_stimulated.smd" weightlist "weights_stimulated_idle_walk" worldspace hidden }
+$sequence "layer_aim_dualpistol" { "dualpistol_idle_aim.smd" frame 4 4 weightlist "weights_stimulated_aim" worldspace addlayer "layer_dualpistol_aim_9directions" hidden }
+$sequence "layer_run_aim_dualpistol" { "dualpistol_run_aim_layer.smd" weightlist "weights_stimulated_aim" worldspace addlayer "layer_dualpistol_aim_9directions" hidden }
+
+$GenericAssassinShoot "shootdualpistol_r" "dualpistol_shoot_r.smd" "ACT_RANGE_ATTACK_DUAL_PISTOLS" "layer_dualpistol_aim_9directions"
+$append "shootdualpistol_r" { { event AE_PISTOL_FIRE_RIGHT 0 "" } node "shooting_dualpistol" }
+
+$GenericAssassinShoot "shootdualpistol_l" "dualpistol_shoot_l.smd" "ACT_RANGE_ATTACK_DUAL_PISTOLS" "layer_dualpistol_aim_9directions"
+$append "shootdualpistol_l" { { event AE_PISTOL_FIRE_LEFT 0 "" } node "shooting_dualpistol" }
+
+$sequence "gesture_shoot_dualpistol_r" "dualpistol_shoot_r.smd" subtract "gesture_shoot_dualpistol_r" 0 delta activity "ACT_GESTURE_RANGE_ATTACK_DUAL_PISTOLS" 1 { event AE_PISTOL_FIRE_RIGHT 0 "" }
+$sequence "gesture_shoot_dualpistol_l" "dualpistol_shoot_l.smd" subtract "gesture_shoot_dualpistol_l" 0 delta activity "ACT_GESTURE_RANGE_ATTACK_DUAL_PISTOLS" 1 { event AE_PISTOL_FIRE_LEFT 0 "" }
+
+$GenericReload "reload_dualpistol" "dualpistol_reload.smd" "ACT_RELOAD_DUAL_PISTOLS" "layer_dualpistol_aim_9directions" 10 37 45 15 node "shooting_dualpistol" alignto "dualpistol_idle"
+
+$makeweapongesture "gesture_reload_dualpistol" "dualpistol_reload.smd" 8 37 45
+$append "gesture_reload_dualpistol" {
+	activity "ACT_GESTURE_RELOAD_DUAL_PISTOLS" 1
+	{ event 3015 15 "" }
+}
+
+// ----------------------------------------------------------------
+
+$sequence "walk_all_dualpistol" {
+	$a_WalkBlends
+	activity "ACT_WALK_DUAL_PISTOLS" 1
+	blendlayer "layer_stimulated_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol"
+}
+
+$sequence "walk_relaxed_all_dualpistol" {
+	$a_WalkEasyBlends
+	activity "ACT_WALK_DUAL_PISTOLS_RELAXED" 1
+	blendlayer "layer_relaxed_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol"
+}
+
+$sequence "walk_stimulated_all_dualpistol" {
+	$a_WalkEasyBlends
+	activity "ACT_WALK_DUAL_PISTOLS_STIMULATED" 1
+	blendlayer "layer_stimulated_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol_stimulated"
+}
+
+$sequence "walk_aiming_dualpistol_all" {
+	$a_WalkBlends
+	activity "ACT_WALK_AIM_DUAL_PISTOLS" 1
+	blendlayer "layer_aim_dualpistol" 0 0 0 0 local
+	node "shooting_dualpistol"
+}
+
+$sequence "walk_aiming_stimulated_all_dualpistol" {
+	$a_WalkEasyBlends
+	activity "ACT_WALK_AIM_DUAL_PISTOLS_STIMULATED" 1
+	blendlayer "layer_aim_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol_stimulated"
+}
+
+$weightlist "weights_run_dualpistol" {
+	 "ValveBiped.Bip01_Pelvis" 0
+	 "ValveBiped.Bip01_Spine" 0.25
+	 "ValveBiped.Bip01_R_Hand" 1
+	 "ValveBiped.Bip01_L_Hand" 1
+	 "ValveBiped.Bip01_R_Thigh" 0
+	 "ValveBiped.Bip01_L_Thigh" 0
+}
+
+$sequence "layer_run_dualpistol" { "dualpistol_idle.smd" weightlist "weights_run_dualpistol" hidden }
+
+$sequence "RunALL_dualpistol" {
+	$a_RunBlends
+	activity "ACT_RUN_DUAL_PISTOLS" 1
+	blendlayer "layer_run_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol"
+}
+
+$sequence "run_relaxed_all_dualpistol" {
+	$a_SlowRunBlends
+	activity "ACT_RUN_DUAL_PISTOLS_RELAXED" 1
+	blendlayer "layer_run_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol"
+}
+
+$sequence "run_stimulated_all_dualpistol" {
+	$a_SlowRunBlends
+	activity "ACT_RUN_DUAL_PISTOLS_STIMULATED" 1
+	blendlayer "layer_run_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol_stimulated"
+}
+
+$sequence "run_aiming_stimulated_all_dualpistol" {
+	$a_SlowRunBlends
+	activity "ACT_RUN_AIM_DUAL_PISTOLS_STIMULATED" 1
+	blendlayer "layer_run_aim_dualpistol" 0 0 0 0 local
+	node "standing_dualpistol_stimulated"
+}
+
+$sequence "run_aiming_dualpistol_all" {
+	$a_RunBlends
+	activity "ACT_RUN_AIM_DUAL_PISTOLS" 1
+	blendlayer "layer_run_aim_dualpistol" 0 0 0 0 local
+	node "shooting_dualpistol"
+}
+
+// ----------------------------------------------------------------
+
+$GenericIdle "dualpistol_crouch_idle" "dualpistol_crouch_idle.smd" "ACT_COVER_DUAL_PISTOLS_LOW" node "crouching_dualpistol"
+$GenericCombatIdle_NoHandIK "dualpistol_crouch_aim" "dualpistol_crouch_aim.smd" "ACT_RANGE_AIM_DUAL_PISTOLS_LOW" "layer_dualpistol_aim_9directions" node "crouchshooting_dualpistol"
+
+$GenericReloadFromIdle "dualpistol_crouch_reload" "dualpistol_crouch_aim.smd" "ACT_RELOAD_DUAL_PISTOLS_LOW" "layer_dualpistol_aim_9directions" "gesture_reload_dualpistol" 10 37 45 15 node "crouchshooting_dualpistol"
+
+$GenericAssassinShootFromIdle "shootdualpistolc_r" "dualpistol_crouch_aim.smd" "ACT_RANGE_ATTACK_DUAL_PISTOLS_LOW" "layer_dualpistol_aim_9directions" "gesture_shoot_dualpistol_r" 9
+$append "shootdualpistolc_r" { { event AE_PISTOL_FIRE_RIGHT 0 "" } node "crouchshooting_dualpistol" }
+
+$GenericAssassinShootFromIdle "shootdualpistolc_l" "dualpistol_crouch_aim.smd" "ACT_RANGE_ATTACK_DUAL_PISTOLS_LOW" "layer_dualpistol_aim_9directions" "gesture_shoot_dualpistol_l" 9
+$append "shootdualpistolc_l" { { event AE_PISTOL_FIRE_LEFT 0 "" } node "crouchshooting_dualpistol" }
+
+$sequence "Crouch_Run_dualpistol_ALL" { $a_CrouchRunBlends activity "ACT_RUN_CROUCH_DUAL_PISTOLS" 1 }
+$sequence "Crouch_Walk_dualpistol_ALL" { $a_CrouchWalkBlends activity "ACT_WALK_CROUCH_DUAL_PISTOLS" 1 }
+
+// ----------------------------------------------------------------
+
+$makeweapongesturep weapon_draw_dualpistol_gesture "dualpistol_unholster.smd" 10 15 30
+$append weapon_draw_dualpistol_gesture {
+	fps 30
+	activity "ACT_ARM_DUAL_PISTOLS" 1
+	{ event AE_NPC_DRAW 10 "" }
+}
+
+$makeweapongesturep weapon_holster_dualpistol_gesture "dualpistol_holster.smd" 10 15 30
+$append weapon_draw_dualpistol_gesture {
+	fps 30
+	activity "ACT_DISARM_DUAL_PISTOLS" 1
+	{ event AE_NPC_HOLSTER 15 "" }
+}
+
+// ----------------------------------------------------------------
+
+$sequence "dualpistol_jump_start" "dualpistol_jump_start.smd" activity "ACT_ASSASSIN_ROLL_JUMP" 1
+$sequence "dualpistol_jump_glide" "dualpistol_jump_glide.smd" activity "ACT_ASSASSIN_ROLL_GLIDE" 1 loop fps 45
+$sequence "dualpistol_jump_land" "dualpistol_jump_land.smd" activity "ACT_ASSASSIN_ROLL_LAND" 1 fps 35 {
+	ikrule lfoot footstep range 4 7 15 15
+	ikrule rfoot footstep range 4 7 15 15
+}
+
+// ----------------------------------------------------------------
+
+$sequence "dualpistol_dodge_kick" "dualpistol_dodge_kick_slower.smd" activity "ACT_ASSASSIN_DODGE_KICK" 1 {
+	{ event AE_ASSASSIN_KICK_HIT 20 "" }
+	walkframe 33 LX LY
+	ikrule lfoot footstep
+	ikrule rfoot footstep range 0 0 16 20
+	ikrule rfoot footstep range 30 40 40 40
+}
+
+$sequence "alyx_zombieDuck" "alyx_zombieDuck.smd" activity "ACT_DUCK_DODGE" 1 walkframe 29 LX LY
+
+// ----------------------------------------------------------------
+
+$sequence "dualpistol_transition_idle_to_combat" "dualpistol_transition_idle_to_combat.smd" activity "ACT_TRANSITION" 1 transition "standing_dualpistol" "shooting_dualpistol" blendlayer "layer_dualpistol_aim_9directions" 0 10 10 10
+$sequence "dualpistol_transition_idle_stimulated_to_combat" "dualpistol_transition_idle_stimulated_to_combat.smd" activity "ACT_TRANSITION" 1 transition "standing_dualpistol_stimulated" "shooting_dualpistol" blendlayer "layer_dualpistol_aim_9directions" 0 10 10 10
+
+$sequence "dualpistol_transition_combat_to_idle" "dualpistol_transition_combat_to_idle.smd" activity "ACT_TRANSITION" 1 transition "shooting_dualpistol" "standing_dualpistol" blendlayer "layer_dualpistol_aim_9directions" 0 0 0 15
+$sequence "dualpistol_transition_combat_to_idle_stimulated" "dualpistol_transition_combat_to_idle_stimulated.smd" activity "ACT_TRANSITION" 1 transition "shooting_dualpistol" "standing_dualpistol_stimulated" blendlayer "layer_dualpistol_aim_9directions" 0 0 0 15
+
+$sequence "dualpistol_transition_shoot_to_crouch" "dualpistol_transition_shoot_to_crouch.smd" activity "ACT_TRANSITION" 1 transition "shooting_dualpistol" "crouching_dualpistol" blendlayer "layer_dualpistol_aim_9directions" 0 0 0 15
+$sequence "dualpistol_transition_shoot_to_crouchshoot" "dualpistol_transition_shoot_to_crouchshoot.smd" activity "ACT_TRANSITION" 1 transition "shooting_dualpistol" "crouchshooting_dualpistol" addlayer "layer_dualpistol_aim_9directions"
+
+$sequence "dualpistol_transition_crouch_to_shoot" "dualpistol_transition_crouch_to_shoot.smd" activity "ACT_TRANSITION" 1 transition "crouching_dualpistol" "shooting_dualpistol" blendlayer "layer_dualpistol_aim_9directions" 0 15 15 15
+$sequence "dualpistol_transition_crouchshoot_to_shoot" "dualpistol_transition_crouchshoot_to_shoot.smd" activity "ACT_TRANSITION" 1 transition "crouchshooting_dualpistol" "shooting_dualpistol" addlayer "layer_dualpistol_aim_9directions"
+$sequence "dualpistol_transition_crouchshoot_to_crouch" "dualpistol_transition_crouchshoot_to_crouch.smd" activity "ACT_TRANSITION" 1 transition "crouchshooting_dualpistol" "crouching_dualpistol"
+
+$sequence "dualpistol_transition_crouch_to_idle" "dualpistol_transition_crouch_to_idle.smd" activity "ACT_TRANSITION" 1 transition "crouching_dualpistol" "standing_dualpistol"
+$sequence "dualpistol_transition_crouch_to_idle_stimulated" "dualpistol_transition_crouch_to_idle_stimulated.smd" activity "ACT_TRANSITION" 1 transition "crouching_dualpistol" "standing_dualpistol_stimulated"
+$sequence "dualpistol_transition_crouch_to_crouchshoot" "dualpistol_transition_crouch_to_crouchshoot.smd" activity "ACT_TRANSITION" 1 transition "crouching_dualpistol" "crouchshooting_dualpistol"
+
+// ----------------------------------------------------------------
+
+//$sequence "idle" {
+//	"idle3.smd"
+//	activity "ACT_IDLE" 1
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 30
+//	loop
+//}
+
+//$sequence "run" {
+//	"run.smd"
+//	activity "ACT_RUN" 1
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 40
+//	loop
+//	LX
+//}
+
+//$sequence "grenadethrow" {
+//	"grenadethrow.smd"
+//	activity "ACT_RANGE_ATTACK2" 1
+//	{ event 4 7 "" }
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 30
+//	loop
+//}
+
+//$sequence "perch" {
+//	"perch.smd"
+//	activity "ACT_ASSASSIN_PERCH" 1
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 35
+//}
+
+//$sequence "cover" {
+//	"perch.smd"
+//	activity "ACT_COVER" 1
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 35
+//}
+
+//$sequence "kick_old" {
+//	"kick.smd"
+//	activity "ACT_MELEE_ATTACK1" 1
+//	{ event 3 10 "" }
+//	//weightlist "NoHead"
+//	fps 30
+//}
+
+$sequence "kick" {
+	"kick_new.smd"
+	activity "ACT_ASSASSIN_KICK" 2
+	{ event AE_ASSASSIN_KICK_HIT 5 "" }
+	{ event AE_ASSASSIN_KICK_HIT 21 "" }
+	//weightlist "NoHead"
+	fps 30
+}
+
+$sequence "kickshort" {
+	"kickshort_new.smd"
+	activity "ACT_ASSASSIN_KICK" 1
+	{ event AE_ASSASSIN_KICK_HIT 10 "" }
+	fps 30
+	ikrule lfoot footstep
+	ikrule rfoot footstep range 0 0 0 3
+	ikrule rfoot footstep range 16 21 21 21
+}
+
+$sequence "lunge" {
+	"kickshort.smd"
+	activity "ACT_ASSASSIN_LUNGE" 1
+	{ event 3 10 "" }
+	fadein 0.2
+	fadeout 0.2
+	fps 30
+}
+
+//$sequence "jump" {
+//	"jump.smd"
+//	activity "ACT_ASSASSIN_ROLL_JUMP" 1
+//	{ event 3 6 "" }
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 25
+//}
+//
+//$sequence "fly_up" {
+//	"fly_up.smd"
+//	activity "ACT_ASSASSIN_ROLL_GLIDE" 1
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 25
+//	loop
+//}
+//
+//$sequence "landfromjump" {
+//	"landfromjump.smd"
+//	activity "ACT_ASSASSIN_ROLL_LAND" 1
+//	fadein 0.2
+//	fadeout 0.2
+//	fps 30
+//}
+
+//$weightlist "NoPelvis"		{ "ValveBiped.Bip01_Pelvis" 0.0 "ValveBiped.Bip01_Spine" 1.0 "ValveBiped.Bip01_L_Thigh" 1.0 "ValveBiped.Bip01_R_Thigh" 1.0 }
+//$weightlist "PelvisOnly"	{ "ValveBiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_Spine" 0.0 "ValveBiped.Bip01_L_Thigh" 0.0 "ValveBiped.Bip01_R_Thigh" 0.0 }
+
+$animation "a_FlipLeft" "FlipLeft.smd" {
+	ikrule "lfoot" release
+	ikrule "rfoot" release
+	ikrule "rhand" release
+	ikrule "lhand" release
+	walkframe 10 LY
+	walkframe 27 LY
+}
+
+$animation "a_FlipRight" "FlipRight.smd" {
+	ikrule "lfoot" release
+	ikrule "rfoot" release
+	ikrule "rhand" release
+	ikrule "lhand" release
+	walkframe 14 LY
+	walkframe 24 LY
+}
+
+$animation "a_FlipBack" "FlipBack_new.smd" {
+	ikrule "lfoot" release
+	ikrule "rfoot" release
+	ikrule "rhand" release
+	ikrule "lhand" release
+	walkframe 10 LX
+	walkframe 27 LX
+}
+
+$animation "a_FlipForward" "FlipForward_new.smd" {
+	ikrule "lfoot" release
+	ikrule "rfoot" release
+	ikrule "rhand" release
+	ikrule "lhand" release
+	walkframe 14 LX
+	walkframe 24 LX
+}
+
+$sequence "FlipLeft" {
+	a_FlipLeft
+	activity "ACT_ASSASSIN_FLIP_LEFT" 1
+}
+
+$sequence "FlipRight" {
+	a_FlipRight
+	activity "ACT_ASSASSIN_FLIP_RIGHT" 1
+}
+
+$sequence "FlipBack" {
+	a_FlipBack
+	activity "ACT_ASSASSIN_FLIP_BACK" 1
+}
+
+$sequence "FlipForward" {
+	a_FlipForward
+	activity "ACT_ASSASSIN_FLIP_FORWARD" 1
+}
+
+$definemacro GenericAssassinFlip SeqName ActName \\
+$sequence $SeqName$ { \\
+	a_FlipBack \\
+	a_FlipRight \\
+	a_FlipForward \\
+	a_FlipLeft \\
+	a_FlipBack \\
+	activity $ActName$ 1 \\
+	blend "move_yaw" -180 180 \\
+	blendwidth 5 \\
+} \\
+$continue $SeqName$ \\
+
+$definemacro GenericAssassinFlipLoop SeqName ActName \\
+$sequence $SeqName$ { \\
+	a_FlipBack \\
+	a_FlipRight \\
+	a_FlipForward \\
+	a_FlipLeft \\
+	a_FlipBack \\
+	activity $ActName$ 1 \\
+	blend "move_yaw" -180 180 \\
+	blendwidth 5 \\
+	loop \\
+} \\
+$continue $SeqName$ \\
+
+$GenericAssassinFlip "FlipAll"				"ACT_ASSASSIN_FLIP"
+$GenericAssassinFlip "FlipAll_DualPistol"	"ACT_ASSASSIN_FLIP_DUAL_PISTOLS"
+$GenericAssassinFlip "FlipAll_Pistol"		"ACT_ASSASSIN_FLIP_PISTOL" addlayer "layer_flip_pistol"
+$GenericAssassinFlip "FlipAll_Rifle"		"ACT_ASSASSIN_FLIP_RIFLE" addlayer "layer_flip_rifle"
+
+$GenericAssassinFlipLoop "FlipAll_Loop"				"ACT_ASSASSIN_FLIP_LOOP"
+$GenericAssassinFlipLoop "FlipAll_Loop_DualPistol"	"ACT_ASSASSIN_FLIP_LOOP_DUAL_PISTOLS"
+$GenericAssassinFlipLoop "FlipAll_Loop_Pistol"		"ACT_ASSASSIN_FLIP_LOOP_PISTOL" addlayer "layer_flip_pistol"
+$GenericAssassinFlipLoop "FlipAll_Loop_Rifle"		"ACT_ASSASSIN_FLIP_LOOP_RIFLE" addlayer "layer_flip_rifle"
+
+//$animation "a_aim_crouch_neutral" "a_aim_crouch_Mid_Center.smd" {
+//
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Down_Left" "a_aim_crouch_Down_Left.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Down_Center" "a_aim_crouch_Down_Center.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Down_Right" "a_aim_crouch_Down_Right.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Mid_Left" "a_aim_crouch_Mid_Left.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Mid_Center" "a_aim_crouch_Mid_Center.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Mid_Right" "a_aim_crouch_Mid_Right.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Up_Left" "a_aim_crouch_Up_Left.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Up_Center" "a_aim_crouch_Up_Center.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_aim_crouch_Up_Right" "a_aim_crouch_Up_Right.smd" {
+//
+//subtract "a_aim_crouch_neutral" 0
+//	fps 30
+//}
+//
+//$animation "a_Aim_Crouching" "a_Aim_Crouching.smd" {
+//	fps 30
+//	loop
+//}
+//
+//$animation "a_Shoot_crouching" "shoot.smd" {
+//	fps 30
+//	loop
+//}
+//
+//$sequence "layer_aim_crouch_all" {
+//	"a_aim_crouch_Up_Right"
+//	"a_aim_crouch_Up_Center"
+//	"a_aim_crouch_Up_Left"
+//	"a_aim_crouch_Mid_Right"
+//	"a_aim_crouch_Mid_Center"
+//	"a_aim_crouch_Mid_Left"
+//	"a_aim_crouch_Down_Right"
+//	"a_aim_crouch_Down_Center"
+//	"a_aim_crouch_Down_Left"
+//	blend "aim_yaw" -60 60
+//	blend "aim_pitch" -60 60
+//	fadein 0.2
+//	fadeout 0.2
+//	delta
+//	iklock "rfoot" 1 0
+//	iklock "lfoot" 1 0
+//	hidden
+//}
+//
+//$sequence "Aim_Crouching" {
+//	"a_Aim_Crouching"
+//	fadein 0.2
+//	fadeout 0.2
+//	addlayer "layer_aim_crouch_all"
+//	hidden
+//}
+//
+//$sequence "Shoot_crouching" {
+//	"a_Shoot_crouching"
+//	activity "ACT_RANGE_ATTACK1" 1
+//	{ event 1 0 "" }
+//	{ event 2 2 "" }
+//	fadein 0.2
+//	fadeout 0.2
+//	addlayer "layer_aim_crouch_all"
+//}
+
+$popd
