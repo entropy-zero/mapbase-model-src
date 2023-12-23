@@ -1,0 +1,128 @@
+
+// ----------------------------------------------------------------
+// OLD: Swap the readiness animation activities
+// ----------------------------------------------------------------
+
+//$definemacro SoldierStimulatedShoot IdleName IdleSeq IdleAct StimulatedLayer GestureLayer NumFrames \\
+//$sequence $IdleName$ { \\
+//	$IdleSeq$ \\
+//	numframes $NumFrames$ \\
+//	//{ event 3014 1 "" } \\
+//	activity $IdleAct$ 1 \\
+//	cmdlist lockfeet \\
+//	blendlayer "layer_stimulated_aim_legs" 0 0 0 0 local \\
+//	addlayer $StimulatedLayer$ \\
+//	blendlayer $GestureLayer$ 0 0 0 0 local \\
+//}
+//
+//// AR1
+//$append "CombatIdle1_AR1" { activity "ACT_IDLE_AIM_AR1_STIMULATED" 1 }
+//$append "CombatIdle2_AR1" { activity "ACT_IDLE_ANGRY_AR1" 1 }
+//$append "shootAR1s"  { activity "ACT_RANGE_ATTACK_AR1_STIMULATED" 1 }
+//$SoldierStimulatedShoot "shootAR1s_fromchest" "combine_soldier_anims_anims\Idle1.smd" "ACT_RANGE_ATTACK_AR1" "layer_stimulated_aim_ar1" "gesture_shoot_ar1" 5
+//
+////$append "RunAIMALL1_AR1" { activity "ACT_RUN_AIM_AR1_STIMULATED" 1 }
+////$append "Walk_aiming_all_AR1" { activity "ACT_WALK_AIM_AR1_STIMULATED" 1 }
+//
+//$append "run_aiming_stimulated_all_AR1" { activity "ACT_RUN_AIM_AR1" 1 }
+//$append "walk_aiming_stimulated_all_AR1" { activity "ACT_WALK_AIM_AR1" 1 }
+//
+//// AR2
+//$append "CombatIdle1" { activity "ACT_IDLE_AIM_AR2_STIMULATED" 1 }
+//$append "CombatIdle2" { activity "ACT_IDLE_ANGRY_AR2" 1 }
+//$append "shootAR2s"  { activity "ACT_RANGE_ATTACK_AR2_STIMULATED" 1 }
+//$SoldierStimulatedShoot "shootAR2s_fromchest" "combine_soldier_anims_anims\custom\Idle1_AR2.smd" "ACT_RANGE_ATTACK_AR2" "layer_stimulated_aim_ar2" "gesture_shoot_ar2" 5
+//
+//$append "RunAIMALL1_AR2" { activity "ACT_RUN_AIM_AR2_STIMULATED" 1 }
+//$append "Walk_aiming_all_AR2" { activity "ACT_WALK_AIM_AR2_STIMULATED" 1 }
+//
+//$append "run_aiming_stimulated_all_AR2" { activity "ACT_RUN_AIM_AR2" 1 }
+//$append "walk_aiming_stimulated_all_AR2" { activity "ACT_WALK_AIM_AR2" 1 }
+//
+//// SMG1
+//$append "CombatIdle1_SMG1" { activity "ACT_IDLE_AIM_SMG1_STIMULATED" 1 }
+//$append "CombatIdle2_SMG1" { activity "ACT_IDLE_ANGRY_SMG1" 1 }
+//$append "shootSMG1s"  { activity "ACT_RANGE_ATTACK_SMG1_STIMULATED" 1 }
+//$SoldierStimulatedShoot "shootSMG1s_fromchest" "combine_soldier_anims_anims\custom\Idle1_SMG1.smd" "ACT_RANGE_ATTACK_SMG1" "layer_stimulated_aim_smg1" "gesture_shoot_smg1" 5
+//
+//$append "RunAIMALL1" { activity "ACT_RUN_AIM_SMG1_STIMULATED" 1 }
+//$append "Walk_aiming_all" { activity "ACT_WALK_AIM_SMG1_STIMULATED" 1 }
+//
+//$append "run_aiming_stimulated_all_SMG1" { activity "ACT_RUN_AIM_SMG1" 1 }
+//$append "walk_aiming_stimulated_all_SMG1" { activity "ACT_WALK_AIM_SMG1" 1 }
+
+
+// ----------------------------------------------------------------
+// New transitions
+// ----------------------------------------------------------------
+
+$pushd "combine_soldier_anims_anims"
+
+// AR1 to crouch
+
+//$CombatStandCrouchTransition "Combat_stand_to_crouch_ar1" "Combat_stand_to_crouch.smd" "shooting_ar1" "crouching_ar2"
+//$CombatCrouchStandTransition "Crouch_to_combat_stand_ar1" "Crouch_to_combat_stand.smd" "crouching_ar2" "shooting_ar1"
+
+//$GenericTransitionBlend "Combat_stand_to_crouch_ar1" "Combat_stand_to_crouch.smd" "CombatIdle2_AR1" "crouch_aim_ar1" "standing_alert_ar1" "crouching_ar2" 16
+//$GenericTransitionBlend "Crouch_to_combat_stand_ar1" "Crouch_to_combat_stand.smd" "crouch_aim_ar1" "CombatIdle2_AR1" "crouching_ar2" "standing_alert_ar1" 15
+
+$GenericTransitionBlend "Combat_stand_to_crouch_ar1" "Combat_stand_to_crouch.smd" "CombatIdle3_AR1" "crouch_aim_ar1" "shooting_ar1" "crouching_ar2" 16
+$GenericTransitionBlend "Crouch_to_combat_stand_ar1" "Crouch_to_combat_stand.smd" "crouch_aim_ar1" "CombatIdle3_AR1" "crouching_ar2" "shooting_ar1" 15
+
+$popd
+
+
+
+// ----------------------------------------------------------------
+// Disable old activities
+// ----------------------------------------------------------------
+
+// AR1
+$append "CombatIdle1_AR1" { activity "ACT_IDLE_AIM_AR1_OLD" 1 }
+$append "shootAR1s"  { activity "ACT_RANGE_ATTACK_AR1_OLD" 1 }
+
+////$append "RunAIMALL1_AR1" { activity "ACT_RUN_AIM_AR1_STIMULATED" 1 }
+////$append "Walk_aiming_all_AR1" { activity "ACT_WALK_AIM_AR1_STIMULATED" 1 }
+//
+//$append "run_aiming_stimulated_all_AR1" { activity "ACT_RUN_AIM_AR1" 1 }
+//$append "walk_aiming_stimulated_all_AR1" { activity "ACT_WALK_AIM_AR1" 1 }
+
+// AR2
+$append "CombatIdle1" { activity "ACT_IDLE_AIM_AR2_OLD" 1 }
+$append "shootAR2s"  { activity "ACT_RANGE_ATTACK_AR2_OLD" 1 }
+
+//$append "RunAIMALL1_AR2" { activity "ACT_RUN_AIM_AR2_STIMULATED" 1 }
+//$append "Walk_aiming_all_AR2" { activity "ACT_WALK_AIM_AR2_STIMULATED" 1 }
+//
+//$append "run_aiming_stimulated_all_AR2" { activity "ACT_RUN_AIM_AR2" 1 }
+//$append "walk_aiming_stimulated_all_AR2" { activity "ACT_WALK_AIM_AR2" 1 }
+
+// SMG1
+$append "CombatIdle1_SMG1" { activity "ACT_IDLE_AIM_SMG1_OLD" 1 }
+$append "shootSMG1s"  { activity "ACT_RANGE_ATTACK_SMG1_OLD" 1 }
+
+//$append "RunAIMALL1" { activity "ACT_RUN_AIM_SMG1_STIMULATED" 1 }
+//$append "Walk_aiming_all" { activity "ACT_WALK_AIM_SMG1_STIMULATED" 1 }
+//
+//$append "run_aiming_stimulated_all_SMG1" { activity "ACT_RUN_AIM_SMG1" 1 }
+//$append "walk_aiming_stimulated_all_SMG1" { activity "ACT_WALK_AIM_SMG1" 1 }
+
+// Pistol
+$append "CombatIdle1_Pistol" { activity "ACT_IDLE_AIM_PISTOL_OLD" 1 }
+$append "shootp1"  { activity "ACT_RANGE_ATTACK_PISTOL_OLD" 1 }
+
+// ----------------------------------------------------------------
+// New combat idles
+// ----------------------------------------------------------------
+
+$GenericCombatIdle "CombatIdle3_AR1" "ez2_combine_grunt_anims\CombatIdle3_AR1.smd" "ACT_IDLE_ANGRY_AR1" "Aim_stand_delta_all" node "shooting_ar2" alignto "CombatIdle1" //iklock "lhand" 1 0
+$GenericCombatIdle "CombatIdle3" "ez2_combine_grunt_anims\CombatIdle3_AR2.smd" "ACT_IDLE_ANGRY_AR2" "Aim_stand_delta_all" node "shooting_ar2" alignto "CombatIdle1"
+$GenericCombatIdle "CombatIdle3_SMG1" "ez2_combine_grunt_anims\CombatIdle3_SMG1.smd" "ACT_IDLE_ANGRY_SMG1" "Aim_stand_delta_all" node "shooting_smg1" alignto "CombatIdle1"
+$GenericCombatIdle "CombatIdle3_SMG2" "ez2_combine_grunt_anims\CombatIdle3_SMG1.smd" "ACT_IDLE_ANGRY_SMG2" "Aim_stand_delta_all" node "shooting_smg1" alignto "CombatIdle1_SMG2"
+$GenericCombatIdle "CombatIdle3_Pistol" "ez2_combine_grunt_anims\CombatIdle3_Pistol.smd" "ACT_IDLE_ANGRY_PISTOL" "Aim_stand_delta_all" node "shooting_pistol" alignto "CombatIdle1"
+
+$GenericShoot "shootAR1s_new" "combine_soldier_anims_anims\shootAR2s.smd" "ACT_RANGE_ATTACK_AR1" "Aim_stand_delta_all" match "CombatIdle3_AR1" align "CombatIdle3_AR1" Z 0 0
+$GenericShoot "shootAR2s_new" "combine_soldier_anims_anims\shootAR2s.smd" "ACT_RANGE_ATTACK_AR2" "Aim_stand_delta_all" match "CombatIdle3" align "CombatIdle3" Z 0 0
+$GenericShoot "shootSMG1s_new" "combine_soldier_anims_anims\shootSMG1s.smd" "ACT_RANGE_ATTACK_SMG1" "Aim_stand_delta_all" match "CombatIdle3_SMG1" align "CombatIdle3_SMG1" Z 0 0
+$GenericShoot "shootSMG2s_new" "combine_soldier_anims_anims\shootSMG1s.smd" "ACT_RANGE_ATTACK_SMG2" "Aim_stand_delta_all" match "CombatIdle3_SMG2" align "CombatIdle3_SMG2" Z 0 0
+$GenericShoot "shootp1_new" "combine_soldier_anims_anims\custom\shootp1.smd" "ACT_RANGE_ATTACK_PISTOL" "Aim_stand_delta_all" match "CombatIdle3_Pistol" align "CombatIdle3_Pistol" Z 0 0
