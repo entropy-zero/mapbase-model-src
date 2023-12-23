@@ -1,0 +1,15 @@
+
+$definemacro VortAthenaeumModelKV \\
+	dynamic_interactions \\
+	{ \\
+		"vort_v_cop_vorttackle_1" \\
+		{ \\
+			"mapbase" "1" \\
+			"trigger" "auto_in_combat" \\
+			"origin_relative" "48 0 0" \\
+			"angles_relative" "0 180 0" \\
+			"end_position" "98 0 0" \\
+			"sequence" "vort_v_cop_vorttackle_1" \\
+			"delay" "20.0" \\
+		} \\
+	} \\
