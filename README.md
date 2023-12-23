@@ -1,3 +1,14 @@
+
+This is Entropy : Zero's fork of Mapbase's model sources. This is used for certain custom animations used by new NPCs, mainly those created for E:Z2 sequel projects and/or NPCs which don't appear in E:Z2 but are still available for modding purposes. Note that some of these animations are meant to be used with models that are not available in E:Z2 or this repository, although they should still function on any model if specified to include them.
+
+All new animation QCs are prefixed with `ez2_` and can be found in the `modelsrc` folder.
+
+Please open an issue if you have trouble compiling any of these files.
+
+Content below is from the original Mapbase model sources:
+
+---
+
 # Mapbase Model Sources
 
 This repository contains most of Mapbase's model and animation source files, primarily `.qc`, `.qci`, `.smd`, and `.blend` files.
