@@ -1,0 +1,72 @@
+// ================================================================
+// 
+// New Soldier Readiness Animations
+// 
+// ================================================================
+
+//$sequence "layer_relaxed_ar2" { "combine_soldier_anims_anims\custom\Idle1_AR2.smd" frame 0 0 weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+//$sequence "layer_relaxed_smg1" { "combine_soldier_anims_anims\custom\Idle1_SMG1.smd" frame 0 0 weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+//$sequence "layer_relaxed_shotgun" { "combine_soldier_anims_anims\custom\Idle1_Shotgun.smd" frame 0 0 weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+
+// Stimulated idle is basically half-idle, half-combat.
+$weightlist "weights_stimulated_idle" { "ValveBiped.Bip01_Pelvis" 0.5 }
+
+$weightlist "weights_stimulated_idle_walk" {
+	 "ValveBiped.Bip01_Pelvis" 0.1
+	 "ValveBiped.Bip01_Spine" 0.5
+	 "ValveBiped.Bip01_R_Thigh" 0
+	 "ValveBiped.Bip01_L_Thigh" 0
+	 "ValveBiped.Cod" 1
+}
+
+$weightlist "weights_stimulated_aim" {
+	 "ValveBiped.Bip01_Pelvis" 0.1
+	 "ValveBiped.Bip01_Spine" 0.1
+	 "ValveBiped.Bip01_Spine1" 0.2
+	 "ValveBiped.Bip01_Spine2" 0.3
+	 "ValveBiped.Bip01_Spine4" 0.4
+	 "ValveBiped.Bip01_L_Clavicle" 1
+	 "ValveBiped.Bip01_R_Clavicle" 1
+	 "ValveBiped.Bip01_R_Thigh" 0
+	 "ValveBiped.Bip01_L_Thigh" 0
+	 "ValveBiped.Cod" 1
+}
+
+$weightlist "weights_stimulated_aim_legs" {
+	 "ValveBiped.Bip01_Pelvis" 0.5
+	 "ValveBiped.Bip01_Spine" 0
+	 "ValveBiped.Cod" 0.5
+}
+
+// Stronger and doesn't care about the pelvis (for non-worldspace layers)
+$weightlist "weights_stimulated_aim_2" {
+	 "ValveBiped.Bip01_Pelvis" 0
+	 "ValveBiped.Bip01_Spine" 0.2
+	 "ValveBiped.Bip01_Spine1" 0.4
+	 "ValveBiped.Bip01_Spine2" 0.6
+	 "ValveBiped.Bip01_Spine4" 0.8
+	 "ValveBiped.Bip01_L_Clavicle" 1
+	 "ValveBiped.Bip01_R_Clavicle" 1
+	 "ValveBiped.Bip01_R_Thigh" 0
+	 "ValveBiped.Bip01_L_Thigh" 0
+	 "ValveBiped.Cod" 1
+}
+
+// ----------------------------------------------------------------
+
+$sequence "layer_stimulated_ar1" { "combine_soldier_anims_anims\custom\CombatIdle1_AR1.smd" weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+$sequence "layer_stimulated_ar2" { "combine_soldier_anims_anims\CombatIdle1.smd" weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+$sequence "layer_stimulated_smg1" { "combine_soldier_anims_anims\CombatIdle1_SMG1.smd" weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+$sequence "layer_stimulated_shotgun" { "combine_soldier_anims_anims\CombatIdle1_SG.smd" weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+$sequence "layer_stimulated_shotgun_raised" { "combine_soldier_anims_anims\custom\CombatIdle1_SG_raised.smd" weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+$sequence "layer_stimulated_pistol" { "combine_soldier_anims_anims\custom\CombatIdle1_Pistol.smd" weightlist "weights_stimulated_idle" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+
+$sequence "layer_stimulated_aim_legs" { "combine_soldier_anims_anims\CombatIdle1.smd" weightlist "weights_stimulated_aim_legs" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" hidden }
+
+$sequence "layer_stimulated_aim_ar1" { "combine_soldier_anims_anims\custom\CombatIdle1_AR1.smd" weightlist "weights_stimulated_aim" addlayer "Aim_stand_delta_all" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" worldspace hidden }
+$sequence "layer_stimulated_aim_ar2" { "combine_soldier_anims_anims\CombatIdle1.smd" weightlist "weights_stimulated_aim" addlayer "Aim_stand_delta_all" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" worldspace hidden }
+$sequence "layer_stimulated_aim_smg1" { "combine_soldier_anims_anims\CombatIdle1_SMG1.smd" weightlist "weights_stimulated_aim" addlayer "Aim_stand_delta_all" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" worldspace hidden }
+$sequence "layer_stimulated_aim_shotgun" { "combine_soldier_anims_anims\custom\CombatIdle1_SG_raised.smd" weightlist "weights_stimulated_aim" addlayer "Aim_stand_delta_all" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" worldspace hidden }
+$sequence "layer_stimulated_aim_pistol" { "combine_soldier_anims_anims\custom\CombatIdle1_Pistol.smd" weightlist "weights_stimulated_aim" addlayer "Aim_stand_delta_all" ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" worldspace hidden }
+
+// ----------------------------------------------------------------

@@ -1,0 +1,48 @@
+
+$weightlist "weights_layer_upperBody" {
+	 "ValveBiped.Bip01_Pelvis" 0
+	 "ValveBiped.Bip01_Spine" 1
+	 "ValveBiped.Cod" 1
+}
+
+$pushd "ez2_husk_anims"
+
+$sequence "layer_walk_husk_upperBody" {
+	"WalkN_husk.smd"
+	hidden
+	loop
+	weightlist "weights_layer_upperBody"
+}
+
+$sequence "layer_run_husk_upperBody" {
+	"RunN_husk.smd"
+	hidden
+	loop
+	weightlist "weights_layer_upperBody"
+}
+
+// ----------------------------------------------------------------
+
+$sequence "melee_swing" {
+	"melee_swing.smd"
+	activity "ACT_MELEE_ATTACK_SWING" 1
+	{ event 3001 13 "" }
+	fps 35
+	ikrule "rfoot" footstep contact 0 range 0 0 0 7
+	ikrule "rfoot" footstep contact 0 range 10 14 20 25
+	ikrule "rfoot" footstep contact 0 range 28 35 35 35
+	ikrule "lfoot" footstep contact 0
+	ikrule "rhand" release
+	ikrule "lhand" release
+}
+
+$makeweapongesturep "melee_swing_gesture" "melee_swing.smd" 9 24 35
+$append melee_swing_gesture {
+	fps 30
+	activity "ACT_MELEE_ATTACK_SWING_GESTURE" 1
+	{ event 3001 13 "" }
+}
+
+$popd
+
+$include "ez2_husk_anims_shared_zombine.qci"

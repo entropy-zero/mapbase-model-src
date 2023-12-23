@@ -1,0 +1,74 @@
+
+$sequence "slump_a" {
+	"zombie_soldier_animations_anims\slump_a.smd"
+	loop
+	ikrule "rhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 0
+	ikrule "lhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 1
+	ikrule "rfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 2
+	ikrule "lfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 3
+}
+
+$sequence "slumprise_a" {
+	"zombie_soldier_animations_anims\slumprise_a.smd"
+	{ event AE_ZOMBIE_ALERTSOUND 1 "" }
+	{ event AE_NPC_LEFTFOOT 15 "" }
+	{ event AE_NPC_RIGHTFOOT 50 "" }
+	{ event AE_ZOMBIE_GET_UP 80 "" }
+	ikrule "rhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 0 usesequence 
+	ikrule "lhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 1 usesequence 
+	ikrule "rfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 2 usesequence 
+	ikrule "lfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 3 usesequence 
+	walkframe 68
+	walkframe 127 LX LY
+}
+
+$sequence "slumprise_a_attack" {
+	"zombie_soldier_animations_anims\slumprise_a_attack.smd"
+	{ event AE_ZOMBIE_ALERTSOUND 1 "" }
+	{ event AE_NPC_LEFTFOOT 15 "" }
+	{ event AE_NPC_RIGHTFOOT 50 "" }
+	{ event AE_ZOMBIE_GET_UP 80 "" }
+	{ event AE_ZOMBIE_ATTACK_SCREAM 16 "" }
+	{ event AE_ZOMBIE_ATTACK_RIGHT 36 "" }
+	ikrule "rhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 0 usesequence 
+	ikrule "lhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 1 usesequence 
+	ikrule "rfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 2 usesequence 
+	ikrule "lfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 127 127 target 3 usesequence 
+	walkframe 68
+	walkframe 127 LX LY
+}
+
+$sequence "slumprise_a2" {
+	"zombie_soldier_animations_anims\slumprise_a2.smd"
+	{ event AE_ZOMBIE_ALERTSOUND 1 "" }
+	{ event AE_NPC_RIGHTFOOT 16 "" }
+	{ event AE_NPC_RIGHTFOOT 22 "" }
+	{ event AE_ZOMBIE_GET_UP 24 "" }
+	ikrule "rhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 68 68 target 0 usesequence 
+	ikrule "lhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 68 68 target 1 usesequence 
+	ikrule "rfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 68 68 target 2 usesequence 
+	ikrule "lfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 68 68 target 3 usesequence 
+	walkframe 68 LX LY
+}
+
+$sequence "slump_b" {
+	"zombie_soldier_animations_anims\slump_b.smd"
+	loop
+	ikrule "rhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 0
+	ikrule "lhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 1
+	ikrule "rfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 2
+	ikrule "lfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 14 14 target 3
+}
+
+$sequence "slumprise_b" {
+	"zombie_soldier_animations_anims\slumprise_b.smd"
+	{ event AE_ZOMBIE_ALERTSOUND 1 "" }
+	{ event AE_NPC_LEFTFOOT 13 "" }
+	{ event AE_NPC_RIGHTFOOT 27 "" }
+	{ event AE_ZOMBIE_GET_UP 57 "" }
+	ikrule "rhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 101 101 target 0 usesequence 
+	ikrule "lhand" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 101 101 target 1 usesequence 
+	ikrule "rfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 101 101 target 2 usesequence 
+	ikrule "lfoot" release contact 0 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 0 0 101 101 target 3 usesequence 
+	walkframe 101 LX LY
+}
