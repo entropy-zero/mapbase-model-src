@@ -19,7 +19,7 @@ $sequence "Idle03" "vortigaunt_anims_hl2\Idle01.smd" activity "ACT_IDLE_HURT" 1
 //===================================================================================================
 
 $sequence "vort_v_cop_vorttackle_1" {
-	"vortigaunt_anims\custom\anims\vort_v_cop_vorttackle_1.dmx"
+	"ez2_vortigaunt_athenaeum_anims\vort_v_cop_vorttackle_1.dmx"
 	fps 24
 	angles 90 0 0
 	{ event AE_CL_PLAYSOUND 64 "NPC_Vortigaunt.Claw" }
