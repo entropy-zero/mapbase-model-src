@@ -1,0 +1,82 @@
+// ================================================================
+// 
+// New Pistol Animations for Husks
+// 
+// Author: Blixibon
+// 
+// Metrocop animations were decompiled by Crowbar 0.71
+// 
+// ================================================================
+
+// ================================================================
+// Combat Animations
+// ================================================================
+
+$GenericCombatIdle "pistolangryidle2" "police_animations_anims\pistolangryidle2.smd" "ACT_IDLE_ANGRY_PISTOL" "pistol_Aim_all"
+$append pistolangryidle2 {
+	node "shooting_pistol"
+	fps 4
+}
+
+$GenericIdle "Crouch_idle_pistol" "police_animations_anims\Crouch_idle_pistol.smd" "ACT_COVER_PISTOL_LOW"
+$append Crouch_idle_pistol { node "crouching_pistol" }
+
+$GenericShoot "shootp1" "police_animations_anims\shootp1.smd" "ACT_RANGE_ATTACK_PISTOL" "pistol_Aim_all"
+
+//$sequence "reload_pistol" {
+//	"police_animations_anims\reload_pistol.smd"
+//	activity "ACT_RELOAD_PISTOL" 1
+//	{ event 3017 0 "" }
+//	{ event 3018 34 "" }
+//	fadein 0.2
+//	fadeout 0.2
+//	blendlayer "pistol_Aim_all" 0 0 0 15 spline
+//	blendlayer "pistol_Aim_all" 30 41 41 41 spline
+//	node "shooting_pistol"
+//	fps 30
+//	ikrule "lfoot" footstep contact 0 fakeorigin 11.95 7.22 0 fakerotate 0 0 0 floor 0 height 20 radius 2.5 range 0 0 40 40 target 3
+//	ikrule "rfoot" footstep contact 0 fakeorigin -9.2 -3.23 0 fakerotate 0 0 0 floor 0 height 20 radius 2.5 range 0 0 40 40 target 2
+//	ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" contact 29 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 26 29 30 31 target 1
+//	ikrule "lhand" touch "ValveBiped.Bip01_Spine" contact 13 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 10 13 16 18 target 1
+//	ikrule "lhand" touch "ValveBiped.Bip01_R_Hand" contact 40 fakeorigin 0 0 0 fakerotate 0 0 0 floor 0 height 0 radius 0 range 38 40 10 10 target 1 usesequence 
+//	ikrule "rhand" release
+//}
+
+// ================================================================
+// Walk Animations
+// ================================================================
+$sequence "walk_aiming_pistol_all" {
+	$a_WalkBlends
+	activity "ACT_WALK_AIM_PISTOL" 1
+	addlayer "layer_walk_aiming_pistol"
+}
+
+$sequence "walk_hold_pistol" {
+	$a_WalkBlends
+	activity "ACT_WALK_PISTOL" 1
+	addlayer "layer_walk_hold_pistol"
+	node "standing" // standing_pistol
+}
+
+// ================================================================
+// Run Animations
+// ================================================================
+$sequence "run_hold_pistol" {
+	$a_RunBlends
+	activity "ACT_RUN_PISTOL" 1
+	addlayer "layer_run_hold_pistol"
+	node "standing" // standing_pistol
+}
+
+$sequence "run_aiming_pistol_all" {
+	$a_RunBlends
+	activity "ACT_RUN_AIM_PISTOL" 1
+	blendlayer "layer_run_aiming_pistol" 0 0 0 0 local
+}
+
+// ================================================================
+// Idle Animations
+// ================================================================
+
+//$MakePistolIdle "Idle_Pistol_Relaxed" "male_shared_anims\Idle_SMG1_Relaxed.smd" "Idle_Pistol_Layer_Relaxed" "ACT_NEUTRAL_PISTOL_RELAXED" -1
+//$MakePistolAngry "Idle_Angry_Pistol" "male_shared_anims\Idle_Angry_SMG1.smd" "Idle_Pistol_Layer4" "ACT_IDLE_PISTOL" 1

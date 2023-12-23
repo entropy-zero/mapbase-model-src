@@ -1,0 +1,32 @@
+$ikchain "rhand" "ValveBiped.hand1_R" knee 0 0 0
+$ikchain "lhand" "ValveBiped.hand1_L" knee 0 0 0
+$ikchain "rfoot" "ValveBiped.Bip01_R_Foot" knee 0 0 0
+$ikchain "lfoot" "ValveBiped.Bip01_L_Foot" knee 0 0 0
+
+//$ikautoplaylock rhand 0.5 0.8
+//$ikautoplaylock lhand 0.5 0.8
+//$ikautoplaylock rfoot 1.0 0.1
+//$ikautoplaylock lfoot 1.0 0.1
+
+
+$cmdlist lockfeet {
+	ikrule lfoot footstep height 20 floor 0
+	ikrule rfoot footstep height 20 floor 0
+}
+
+$cmdlist lockfeetandlefthand {
+	ikrule lfoot footstep height 20 floor 0
+	ikrule rfoot footstep height 20 floor 0
+	ikrule lhand touch "ValveBiped.Bip01_R_Hand"
+}
+
+$cmdlist lockfeetnolefthand {
+	ikrule lfoot footstep height 20 floor 0
+	ikrule rfoot footstep height 20 floor 0
+	ikrule lhand release
+}
+
+$cmdlist releasefeet {
+	ikrule lfoot release
+	ikrule rfoot release
+}
