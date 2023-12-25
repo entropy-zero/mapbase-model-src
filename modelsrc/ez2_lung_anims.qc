@@ -32,7 +32,7 @@ $weightlist "upper_worldspaceblend" {
 
 $animation "a_Idle03_layer" "vortigaunt_anims_hl2\Idle01.smd" frame 0 0
 
-$sequence "idle_lung_layer" "anims\Idle01_lung_layer.smd" {
+$sequence "idle_lung_layer" "ez2_lung_anims\Idle01_lung_layer.smd" {
 	frame 0 0
 	subtract "a_Idle03_layer" 0
 	delta
@@ -45,7 +45,7 @@ $sequence "Idle03" "vortigaunt_anims_hl2\Idle01.smd" activity "ACT_IDLE_HURT" 1 
 
 $animation "a_Idle01_layer" "vortigaunt_anims_ep2\Idle01.smd" frame 0 0
 
-$sequence "idle_lung_layer_ep2" "anims\Idle01_lung_layer_ep2.smd" {
+$sequence "idle_lung_layer_ep2" "ez2_lung_anims\Idle01_lung_layer_ep2.smd" {
 	frame 0 0
 	subtract "a_Idle01_layer" 0
 	delta
@@ -56,7 +56,7 @@ $sequence "Idle01" "vortigaunt_anims_ep2\Idle01.smd" activity "ACT_IDLE" 1 addla
 
 //===================================================================================================
 
-$animation "a_runN" "anims\a_lung_runN.smd" {
+$animation "a_runN" "ez2_lung_anims\a_lung_runN.smd" {
 	//ikrule "lfoot" footstep contact 7 fakeorigin 12.83 6.79 0 fakerotate 0 0 0 floor 0 height 18 radius 4 range 17 5 12 17 target 3
 	//ikrule "rfoot" footstep contact 16 fakeorigin 12.83 -4.42 0 fakerotate 0 0 0 floor 0 height 18 radius 4 range 10 15 5 10 target 2
 	loop
@@ -133,7 +133,7 @@ $sequence "Run_all" {
 
 //===================================================================================================
 
-$animation "a_walkN" "anims\a_lung_walkN.smd" {
+$animation "a_walkN" "ez2_lung_anims\a_lung_walkN.smd" {
 	fps 25
 	loop
 	ikrule "lfoot" footstep contact 10 fakeorigin 10.54 7.91 0 fakerotate 0 0 0 floor 0 height 18 radius 4 range 1 7 25 1 target 3
@@ -253,7 +253,7 @@ $sequence "Walk_cautious_all" {
 	"a_WalkW"
 	"a_WalkSW"
 	"a_WalkS"
-	activity "ACT_WALK" 1
+	//activity "ACT_WALK" 1
 	addlayer "cautious_layer"
 	blend "move_yaw" -180 180
 	blendwidth 9
@@ -261,4 +261,75 @@ $sequence "Walk_cautious_all" {
 	{ event 6005 32 "NPC_Lung" }
 	fadein 0.2
 	fadeout 0.2
+}
+
+//===================================================================================================
+// AP scripted
+//===================================================================================================
+
+$weightlist "grub_hold_weights" {
+	"ValveBiped.hips" 0.1
+	"ValveBiped.leg_bone1_L" 0
+	"ValveBiped.leg_bone1_R" 0
+	"ValveBiped.spine1" 0.1
+	"ValveBiped.spine2" 0.2
+	"ValveBiped.spine3" 0.3
+	"ValveBiped.spine4" 0.4
+	"ValveBiped.clavical_L" 0.5
+	"ValveBiped.clavical_R" 0.5
+	"ValveBiped.arm1_L" 0.9
+	"ValveBiped.arm1_R" 0.9
+	"ValveBiped.hand1_L" 1
+	//"ValveBiped.hand1_R" 1
+}
+
+$sequence "ap_grub_hold_layer" "ez2_lung_anims\ap_eat_grub_interrupted.dmx" {
+	angles 90 0 0 frame 0 0
+	ikrule "lhand" touch "ValveBiped.hand1_R"
+	weightlist "grub_hold_weights"
+	worldspace
+	//cmdlist releasefeet
+	hidden
+}
+
+$sequence "ap_grub_hold" "ez2_lung_anims\ap_eat_grub_interrupted.dmx" angles 90 0 0 frame 0 0 cmdlist lockfeet
+
+$sequence "ap_grub_eat_interrupted" "ez2_lung_anims\ap_eat_grub_interrupted.dmx" {
+	angles 90 0 0 fps 24
+	ikrule "lhand" touch "ValveBiped.hand1_R"
+	cmdlist lockfeet
+}
+
+$sequence "Walk_hold_grub_all" {
+	"a_WalkS"
+	"a_WalkSE"
+	"a_WalkE"
+	"a_WalkNE"
+	"a_walkN"
+	"a_WalkNW"
+	"a_WalkW"
+	"a_WalkSW"
+	"a_WalkS"
+	addlayer "ap_grub_hold_layer"
+	blend "move_yaw" -180 180
+	blendwidth 9
+	{ event 6004 15 "NPC_Lung" }
+	{ event 6005 32 "NPC_Lung" }
+}
+
+$sequence "Run_hold_grub_all" {
+	"a_runS"
+	"a_runSE"
+	"a_runE"
+	"a_runNE"
+	"a_runN"
+	"a_runNW"
+	"a_runW"
+	"a_runSW"
+	"a_runS"
+	addlayer "ap_grub_hold_layer"
+	blend "move_yaw" -180 180
+	blendwidth 9
+	{ event 6004 3 "NPC_Lung" }
+	{ event 6005 15 "NPC_Lung" }
 }
