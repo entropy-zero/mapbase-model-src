@@ -35,6 +35,13 @@ $sequence "vort_v_cop_vorttackle_1" {
 	walkframe 81 LX LY
 }
 
+$sequence "vort_v_cop_copbeat_1" {
+	"ez2_vortigaunt_athenaeum_anims\vort_v_cop_copbeat_1.dmx"
+	fps 30 // 24
+	angles 90 0 0
+	{ event AE_NPC_RESPONSE 30 "TLK_WOUND" }
+}
+
 $include "ez2_vortigaunt_athenaeum_modelkv.qci"
 
 $keyvalues

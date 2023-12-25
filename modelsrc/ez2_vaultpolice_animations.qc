@@ -227,10 +227,9 @@ $include "ez2_vaultpolice_animations_shared.qci"
 
 // ================================================================
 
+$include "ez2_vaultpolice_animations_modelkv.qci"
+
 $KeyValues
 {
-	dynamic_interactions 
-	{
-		$DIKV_Alyx
-	}
+	$VaultPoliceModelKV
 }

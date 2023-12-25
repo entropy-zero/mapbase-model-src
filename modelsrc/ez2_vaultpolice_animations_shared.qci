@@ -104,6 +104,26 @@ $sequence "vort_v_cop_vorttackle_1" {
 	angles 90 0 0
 }
 
+$sequence "vort_v_cop_copbeat_1" {
+	"ez2_vaultpolice_animations\vort_v_cop_copbeat_1.dmx"
+	//{ event AE_NPC_RESPONSE 13 "TLK_WOUND" }
+	//{ event AE_NPC_WEAPON_DROP 18 "" }
+	//{ event AE_NPC_RESPONSE 20 "TLK_WOUND" }
+	
+	{ event AE_CL_PLAYSOUND 8 "Weapon_StunStick.Swing" }
+	{ event AE_CL_PLAYSOUND 14 "Rubber.ImpactHard" }
+	{ event AE_CL_PLAYSOUND 28 "d1_canals.citizenpunch_punch_1" }
+	{ event AE_CL_PLAYSOUND 46 "Weapon_StunStick.Melee_Hit" }
+	{ event AE_NPC_HURT_INTERACTION_PARTNER 46 "THEM 200" }
+	fps 30
+	angles 90 0 0
+	walkframe 22 LX LY
+	walkframe 32 LX LY
+	walkframe 40 LX LY
+	walkframe 48 LX LY
+	walkframe 66 LX LY
+}
+
 // ----------------------------------------------------------------
 // AP scripted
 // ----------------------------------------------------------------

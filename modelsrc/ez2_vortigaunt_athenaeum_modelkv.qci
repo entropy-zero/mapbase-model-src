@@ -11,5 +11,6 @@ $definemacro VortAthenaeumModelKV \\
 			"end_position" "98 0 0" \\
 			"sequence" "vort_v_cop_vorttackle_1" \\
 			"delay" "20.0" \\
+			"dont_teleport_at_end" "both" \\
 		} \\
 	} \\

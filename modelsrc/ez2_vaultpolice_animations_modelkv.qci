@@ -1,0 +1,50 @@
+
+// TODO: Use AlyxDI.qci for Alyx interactions KV
+$definemacro VaultPoliceModelKV \\
+	dynamic_interactions \\
+	{ \\
+		"alyx_v_zombie_pistol_180deg_64" \\
+		{ \\
+			"mapbase" "1" \\
+			"trigger" "auto_in_combat" \\
+			"origin_relative" "64 0 0" \\
+			"angles_relative" "0 180 0" \\
+			"sequence" "alyx_zombie_fight2" \\
+			"delay" "20.0" \\
+			"needs_weapon" "ME" \\
+			"weapon_mine" "WEPCLASS_HANDGUN" \\
+		} \\
+		"alyx_v_zombie_rifle_180deg_64" \\
+		{ \\ 
+			"mapbase" "1" \\
+			"trigger" "auto_in_combat" \\
+			"origin_relative" "64 0 0" \\
+			"angles_relative" "0 180 0" \\
+			"activity" "ACT_DI_ALYX_ZOMBIE_SHOTGUN64" \\
+			"delay" "20.0" \\ 
+			"needs_weapon" "ME" \\
+			"weapon_mine" "!=WEPCLASS_HANDGUN" \\
+		} \\
+		"alyx_v_zombie_180deg_64" \\
+		{ \\
+			"mapbase" "1" \\
+			"trigger" "auto_in_combat" \\
+			"origin_relative" "64 0 0" \\
+			"angles_relative" "0 180 0" \\
+			"activity" "ACT_DI_ALYX_ZOMBIE_MELEE" \\
+			"delay" "10.0" \\
+		} \\
+		"vort_v_cop_copbeat_1" \\
+		{ \\
+			"mapbase" "1" \\
+			"trigger" "auto_in_combat" \\
+			"origin_relative" "64 0 0" \\
+			"angles_relative" "0 180 0" \\
+			//"end_position" "98 0 0" \\
+			//"origin_max_delta" "4" \\
+			"sequence" "vort_v_cop_copbeat_1" \\
+			"delay" "20.0" \\
+			"weapon_mine" "weapon_stunstick" \\
+			"dont_teleport_at_end" "both" \\
+		} \\
+	} \\
