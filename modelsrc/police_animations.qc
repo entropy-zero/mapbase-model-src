@@ -220,6 +220,12 @@ $append Heal {
 	{ event AE_CITIZEN_HEAL 31 "" }
 }
 
+// ================================================================
+
+$include "ez2_new_police_anims.qci"
+
+// ================================================================
+
 $KeyValues
 {
 	dynamic_interactions 

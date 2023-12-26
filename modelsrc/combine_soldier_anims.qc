@@ -307,3 +307,9 @@ $append Heal {
 }
 
 $include "SoldierAnimationNodes.qci"
+
+// ================================================================
+
+$include "ez2_new_combine_soldier_anims.qci"
+
+// ================================================================

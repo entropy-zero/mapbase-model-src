@@ -203,6 +203,12 @@ $include "NPCDoorAnims.qci"
 
 $include "AnnabelleAnimations.qci"
 
+// ================================================================
+
+$include "ez2_new_citizen_anims.qci"
+
+// ================================================================
+
 $KeyValues
 {
 	dynamic_interactions 

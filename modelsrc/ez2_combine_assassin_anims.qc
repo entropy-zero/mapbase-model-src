@@ -51,7 +51,7 @@ $definevariable Blend_Idle_Pistol "CombatIdle1_Pistol"
 $definevariable Blend_Idle_Rifle "CombatIdle1_SMG1"
 $definevariable Blend_Idle_Rifle_Crouched "crouch_aim_sm1"
 
-$definevariable Blend_SMD_Default "combine_soldier_anims_anims\CombatIdle1_SMG1.smd"
+$definevariable Blend_SMD_Default "ez2_combine_assassin_anims\dualpistol_idle_aim_static.smd"
 $definevariable Blend_SMD_Unarmed "combine_soldier_anims_anims\Idle_Unarmed.smd"
 $definevariable Blend_SMD_Panicked "combine_soldier_anims_anims\Idle_Unarmed.smd"
 $definevariable Blend_SMD_Pistol "female_shared_anims\Pistol_idle_aim.smd"
@@ -323,3 +323,9 @@ $append Heal {
 }
 
 $include "SoldierAnimationNodes.qci"
+
+// ================================================================
+
+$include "ez2_new_combine_soldier_anims.qci"
+
+// ================================================================

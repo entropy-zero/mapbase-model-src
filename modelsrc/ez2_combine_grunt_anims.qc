@@ -300,6 +300,8 @@ $sequence "run_protected_all" {
 }
 // ================================================================
 
+$include "ez2_new_combine_soldier_anims.qci"
+
 $include "ez2_combine_grunt_anims_shared.qci"
 
 // ================================================================
