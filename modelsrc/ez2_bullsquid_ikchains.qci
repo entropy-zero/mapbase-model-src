@@ -1,0 +1,17 @@
+
+$ikchain "rfoot" "Bip01 R Foot" knee 0.707 0.707 0
+$ikchain "lfoot" "Bip01 L Foot" knee 0.707 0.707 0
+
+//$ikautoplaylock "rfoot" 1 0.1
+//$ikautoplaylock "lfoot" 1 0.1
+
+$cmdlist lockfeet {
+	ikrule lfoot footstep height 20 floor 0
+	ikrule rfoot footstep height 20 floor 0
+}
+
+$cmdlist releasefeet {
+	ikrule lfoot release
+	ikrule rfoot release
+}
+

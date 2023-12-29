@@ -1,0 +1,199 @@
+
+// ----------------------------------------------------------------
+// Stock animations (based on $pushd)
+// ----------------------------------------------------------------
+
+$sequence "ragdoll" {
+	"ragdoll.smd"
+	activity "ACT_DIERAGDOLL" 1
+	fps 2
+}
+
+$sequence "walk" {
+	"walk.smd"
+	activity "ACT_WALK" 1
+	{ event 6004 25 $FootstepSound$ }
+	{ event 6005 49 $FootstepSound$ }
+	loop
+	walkframe 50 LX
+}
+
+$sequence "run" {
+	"run.smd"
+	activity "ACT_RUN" 1
+	{ event 6004 7 $FootstepSound$ }
+	{ event 6005 17 $FootstepSound$ }
+	{ event 6004 26 $FootstepSound$ }
+	{ event 6005 35 $FootstepSound$ }
+	loop
+	walkframe 36 LX
+	ikrule "lfoot" footstep range 0 0 2 4
+	ikrule "rfoot" footstep range 5 8 10 13
+	ikrule "lfoot" footstep range 15 18 21 23
+	ikrule "rfoot" footstep range 24 27 29 32
+	ikrule "lfoot" footstep range 33 36 36 36
+}
+
+$sequence "suprisedhop" {
+	"suprisedhop.smd"
+	activity "ACT_HOP" 1
+	{ event 5 11 "" }
+	fps 37
+}
+
+$sequence "flinchs" {
+	"flinchs.smd"
+	activity "ACT_SMALL_FLINCH" 1
+}
+
+$sequence "flinchb" {
+	"flinchb.smd"
+	activity "ACT_BIG_FLINCH" 1
+}
+
+$sequence "turnleft" {
+	"turnleft.smd"
+	activity "ACT_TURN_LEFT" 1
+}
+
+$sequence "turnright" {
+	"turnright.smd"
+	activity "ACT_TURN_RIGHT" 1
+}
+
+$sequence "idle" {
+	"idle.smd"
+	activity "ACT_IDLE" 1
+	fps 15
+	loop
+	cmdlist lockfeet
+}
+
+$sequence "whip" {
+	"whip.smd"
+	activity "ACT_MELEE_ATTACK1" 1
+	{ event 8 23 "" }
+	{ event 4 23 "" }
+}
+
+$sequence "bite" {
+	"bite.smd"
+	activity "ACT_MELEE_ATTACK2" 1
+	{ event 2 7 "{" }
+	{ event 6 10 "" }
+}
+
+$sequence "range" {
+	"range.smd"
+	activity "ACT_RANGE_ATTACK1" 1
+	{ event 1 11 "" }
+}
+
+$sequence "look" {
+	"look.smd"
+	activity "ACT_INSPECT_WALL" 1
+	{ event 3 10 "" }
+	{ event 3 25 "" }
+	fps 14
+}
+
+$sequence "seecrab" {
+	"seecrab.smd"
+	activity "ACT_SQUID_EXCITED" 1
+	fps 17
+	cmdlist lockfeet
+}
+
+$sequence "eat" {
+	"eat.smd"
+	activity "ACT_SQUID_EAT" 1
+	fps 20
+	loop
+	cmdlist lockfeet
+}
+
+$sequence "inspectdown" {
+	"inspectdown.smd"
+	activity "ACT_SQUID_INSPECT_FLOOR" 1
+	fps 15
+}
+
+$sequence "sniff" {
+	"sniff.smd"
+	activity "ACT_SQUID_DETECT_SCENT" 1
+	fps 15
+}
+
+$sequence "die" {
+	"die.smd"
+	activity "ACT_DIEFORWARD" 1
+	{ event 2002 2 "" }
+	fps 18
+}
+
+$sequence "die1" {
+	"die1.smd"
+	activity "ACT_DIESIMPLE" 1
+	{ event 2002 52 "" }
+	fps 25
+}
+
+$sequence "bulljump" {
+	"bulljump.smd"
+	fps 25
+	cmdlist releasefeet
+}
+
+$sequence "jump_glide" {
+	"jump_glide.smd"
+	activity "ACT_JUMP" 1
+	fps 37
+	loop
+	cmdlist releasefeet
+}
+
+$sequence "draggruntidle" {
+	"draggruntidle.smd"
+	fps 14
+	cmdlist releasefeet
+}
+
+$sequence "draggrunt" {
+	"draggrunt.smd"
+	{ event 1004 1 "NPC_Bullsquid.Idle3" }
+	{ event 1004 12 "NPC_Bullsquid.Idle1" }
+	fps 10
+	cmdlist releasefeet
+}
+
+$sequence "scare" {
+	"scare.smd"
+	{ event 1004 8 "NPC_Bullsquid.AttackGrowl3" }
+	fps 20
+	cmdlist releasefeet
+}
+
+$sequence "squidfallidle" {
+	"squidfallidle.smd"
+	fps 13
+	loop
+	cmdlist releasefeet
+}
+
+$sequence "squidfall" {
+	"squidfall.smd"
+	{ event 1000 1 "" }
+	{ event 1008 3 "NPC_Bullsquid.AttackGrowl2" }
+	{ event 1008 29 "NPC_Bullsquid.AttackGrowl3" }
+	{ event 1008 43 "Debris.Bustflesh2" }
+	fps 32
+	cmdlist releasefeet
+}
+
+$popd
+
+// ----------------------------------------------------------------
+// Custom animations (based on $lockbonelengths)
+// ----------------------------------------------------------------
+
+
