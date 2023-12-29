@@ -262,3 +262,9 @@ $sequence "Man_Gun" {
 	ikrule "lhand" attachment "L_hand_vort" radius 50
 	ikrule "rhand" attachment "R_hand_vort" radius 50
 }
+
+// ================================================================
+
+$include "ez2_new_vort_anims.qci"
+
+// ================================================================

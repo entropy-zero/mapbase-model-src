@@ -1,0 +1,13 @@
+// ================================================================
+// 
+// E:Z2 Vortigaunt Activities
+// 
+// ================================================================
+
+// ----------------------------------------------------------------
+
+$sequence "vort_antlion_ground_nohurt" {
+	"vortigaunt_anims_ep2\vort_antlion_ground.smd"
+	{ event AE_CL_PLAYSOUND 27 "AI_BaseNPC.BodyDrop_Heavy" }
+	{ event AE_CL_PLAYSOUND 50 "NPC_Vortigaunt.Kick" }
+}
