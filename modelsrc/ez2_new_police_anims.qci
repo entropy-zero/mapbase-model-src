@@ -6,8 +6,8 @@
 
 // ----------------------------------------------------------------
 
-$MakeDynamicInteraction gonome_swallow_human_1 "ez2_male_shared_anims\gonome_swallow_human_1.dmx" $Blend_SMD_Default$ 10 50 50
-$append gonome_swallow_human_1 {
+$MakeDynamicInteraction gonome_swallow_human "ez2_male_shared_anims\gonome_swallow_human.dmx" $Blend_SMD_Default$ 10 50 50
+$append gonome_swallow_human {
 	{ event AE_NPC_WEAPON_DROP 18 "" }
 	{ event AE_CL_PLAYSOUND 19 "BaseCombatCharacter.CorpseGib" }
 	{ event AE_CL_PLAYSOUND 23 "Flesh.Break" }
@@ -16,6 +16,6 @@ $append gonome_swallow_human_1 {
 	{ event AE_CL_PLAYSOUND 33 "Flesh.Break" }
 	fps 24
 }
-$append gonome_swallow_human_1_layer {
+$append gonome_swallow_human_layer {
 	fps 24 angles 90 0 0
 }

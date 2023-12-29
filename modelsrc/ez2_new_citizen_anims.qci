@@ -6,8 +6,8 @@
 
 // ----------------------------------------------------------------
 
-$sequence "gonome_swallow_human_1" {
-	"ez2_male_shared_anims\gonome_swallow_human_1.dmx"
+$sequence "gonome_swallow_human" {
+	"ez2_male_shared_anims\gonome_swallow_human.dmx"
 	{ event AE_NPC_WEAPON_DROP 18 "" }
 	{ event AE_CL_PLAYSOUND 19 "BaseCombatCharacter.CorpseGib" }
 	{ event AE_CL_PLAYSOUND 23 "Flesh.Break" }

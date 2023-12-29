@@ -5,6 +5,9 @@ $include "hl2mp_ported_anims/weaponmacros.qci"
 $include "hl2mp_ported_anims/standardikchains.qci"
 $include "ez2_gonome_definebones.qci"
 
+$attachment "blend_attachment_head" "ValveBiped.Bip01_Head1" 0 0 0 rotate 180 0 180
+$attachment "forward" "ValveBiped.Bip01_Spine3" -2.00 0.00 -0.00 rotate -0 75 90
+
 $ikchain "rhand" "ValveBiped.Bip01_R_Hand" knee 0.707 0.707 0
 $ikchain "lhand" "ValveBiped.Bip01_L_Hand" knee 0.707 0.707 0
 $ikchain "rfoot" "ValveBiped.Bip01_R_Foot" knee 0.707 0.707 0
@@ -15,6 +18,32 @@ $ikchain "lfoot" "ValveBiped.Bip01_L_Foot" knee 0.707 0.707 0
 
 $sectionframes 30 120
 $animblocksize 32
+
+//-------------------------------------------------------------------------
+
+$animation "body_turn_neutral" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 0 0
+$animation "body_turn_mid" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 0 0 subtract "body_turn_neutral" 0
+$animation "body_turn_e" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 1 1 subtract "body_turn_neutral" 0
+$animation "body_turn_w" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 2 2 subtract "body_turn_neutral" 0
+$animation "body_turn_s" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 3 3 subtract "body_turn_neutral" 0
+$animation "body_turn_n" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 4 4 subtract "body_turn_neutral" 0
+$animation "body_turn_se" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 5 5 subtract "body_turn_neutral" 0
+$animation "body_turn_ne" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 6 6 subtract "body_turn_neutral" 0
+$animation "body_turn_sw" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 7 7 subtract "body_turn_neutral" 0
+$animation "body_turn_nw" "ez2_gonome_anims\custom\body_turn_matrix.smd" frame 8 8 subtract "body_turn_neutral" 0
+
+$sequence "body_turn" {
+	body_turn_se	body_turn_s   	body_turn_sw
+	body_turn_e    	body_turn_mid  	body_turn_w
+	body_turn_ne   	body_turn_n   	body_turn_nw
+	
+	blendwidth 3
+ 	calcblend aim_yaw "blend_attachment_head" YR  
+ 	calcblend aim_pitch "blend_attachment_head" ZR
+	delta //autoplay
+}
+
+//-------------------------------------------------------------------------
 
 $sequence "walk_new" {
 	"ez2_gonome_anims\custom\walk_new.smd"
@@ -27,6 +56,7 @@ $sequence "walk_new" {
 	ikrule "rfoot" footstep range 0 3 35 38
 	ikrule "lfoot" footstep range 0 0 5 8
 	ikrule "lfoot" footstep range 30 33 60 60
+	addlayer "body_turn"
 }
 
 //$sequence "runlong_new" {
@@ -91,6 +121,7 @@ $sequence "runlong_new_blend" {
 	blendlayer "g_arms_out" 0 0 0 1 poseparameter "arms_out"
 	{ event 6005 14 "Gonome" }
 	{ event 6004 29 "Gonome" }
+	addlayer "body_turn"
 }
 
 //-------------------------------------------------------------------------
@@ -165,6 +196,7 @@ $sequence "idle1" {
 	fps 30
 	loop
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "idle2" {
@@ -173,16 +205,19 @@ $sequence "idle2" {
 	fps 30
 	loop
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "victoryeat1" {
 	"ez2_gonome_anims\victoryeat1.smd"
 	activity "ACT_VICTORY_DANCE" 1
 	//{ event 1004 20 "gonome/gonome_eat.wav" }
-	{ event AE_PREDATOR_EAT 78 "" }
+	{ event AE_PREDATOR_EAT 90 "" }
 	fps 20
 	loop
 	cmdlist lockfeet
+	blendlayer "idle2" 0 0 0 14 spline
+	blendlayer "idle2" 106 120 120 120 spline
 }
 
 $sequence "eat_loop" {
@@ -201,6 +236,7 @@ $sequence "attack1" {
 	//{ event 1011 1 "gonome/gonome_melee1.wav" }
 	fps 37
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "attack2" {
@@ -213,6 +249,7 @@ $sequence "attack2" {
 	{ event 4 59 "" }
 	fps 45
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "attack3" {
@@ -222,6 +259,7 @@ $sequence "attack3" {
 	{ event 1 62 "" }
 	fps 40
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "jump1" {
@@ -254,6 +292,7 @@ $sequence "big_flinch" {
 	activity "ACT_BIG_FLINCH" 1
 	fps 30
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "big_flinch2" {
@@ -261,6 +300,7 @@ $sequence "big_flinch2" {
 	activity "ACT_HOP" 1
 	fps 30
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "small_flinch" {
@@ -268,6 +308,7 @@ $sequence "small_flinch" {
 	activity "ACT_SMALL_FLINCH" 1
 	fps 30
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "flinch" {
@@ -275,6 +316,7 @@ $sequence "flinch" {
 	activity "ACT_SMALL_FLINCH" 5
 	fps 30
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "dead_on_stomach1_1" {
@@ -465,16 +507,38 @@ $sequence "hunter_cit_stomp" {
 	walkframe 72 LX LY
 }
 
-$sequence "gonome_swallow_human_1" {
-	"ez2_gonome_anims\custom\gonome_swallow_human_1.dmx"
-	{ event AE_PREDATOR_SWALLOW_INTERACTION_PARTNER 36 "THEM 200" }
+$sequence "gonome_swallow_human" {
+	"ez2_gonome_anims\custom\gonome_swallow_human.dmx"
+	{ event AE_PREDATOR_SWALLOW_INTERACTION_PARTNER 36 "" }
 	{ event AE_CL_PLAYSOUND 36 "Player.FallGib" }
 	fps 24 angles 90 0 0
+	cmdlist lockfeet
+}
+
+$sequence "gonome_swallow_babysquid" {
+	"ez2_gonome_anims\custom\gonome_swallow_babysquid.dmx"
+	{ event AE_PREDATOR_SWALLOW_INTERACTION_PARTNER 36 "" }
+	{ event AE_CL_PLAYSOUND 36 "Player.FallGib" }
+	fps 24 angles 90 0 0
+	ikrule "rfoot" footstep range 0 0 0 3
+	ikrule "rfoot" footstep range 6 9 10 13
+	ikrule "rfoot" footstep range 17 20 48 48
+	ikrule "lfoot" footstep
+}
+
+$sequence "gonome_stomp_gib" {
+	"ez2_gonome_anims\custom\gonome_stomp_gib.dmx"
+	{ event AE_NPC_HURT_INTERACTION_PARTNER 15 "THEM 200" }
+	{ event AE_CL_PLAYSOUND 15 "Gonome.FootstepRight" }
+	fps 24 angles 90 0 0
+	ikrule "rfoot" footstep range 0 0 0 3
+	ikrule "rfoot" footstep range 30 33 36 36
+	ikrule "lfoot" footstep
 }
 
 $KeyValues
 {
-	dynamic_interactions 
+	dynamic_interactions
 	{
 		//"hunter_tackle" 
 		//{
@@ -504,18 +568,42 @@ $KeyValues
 			"sequence" "hunter_cit_stomp"
 			"delay" "20.0"
 			"dont_teleport_at_end" "both"
-			"squadmate_max_health_ratio" "0.5"
+			//"their_healthfrac_commandable" "0.5"
+			"their_healthfrac" "<=0.5"
 		}
-		"gonome_swallow_human_1" 
+		"gonome_swallow_human" 
 		{
 			"trigger" "auto_in_combat"
 			"origin_relative" "48 0 0"
 			"angles_relative" "0 180 0"
 			"origin_max_delta" "256"
-			"sequence" "gonome_swallow_human_1"
+			"sequence" "gonome_swallow_human"
 			"delay" "15.0"
 			"dont_teleport_at_end" "both"
-			"squadmate_max_health_ratio" "0.5"
+			//"their_healthfrac_commandable" "0.5"
+			"their_healthfrac" "<=0.5"
+		}
+		"gonome_swallow_babysquid" 
+		{
+			"trigger" "auto_in_combat"
+			"origin_relative" "46.172 0 0"
+			"angles_relative" "0 180 0"
+			"origin_max_delta" "576"
+			"sequence" "gonome_swallow_babysquid"
+			"delay" "15.0"
+			"dont_teleport_at_end" "both"
+			"their_healthfrac" "<=0.5"
+		}
+		"gonome_stomp_gib" 
+		{
+			"trigger" "auto_in_combat"
+			"origin_relative" "48 0 0"
+			//"angles_relative" "0 180 0"
+			"origin_max_delta" "256"
+			"sequence" "gonome_stomp_gib"
+			"delay" "15.0"
+			"dont_teleport_at_end" "both"
+			"their_healthfrac" "<=0.5"
 		}
 	}
 }
