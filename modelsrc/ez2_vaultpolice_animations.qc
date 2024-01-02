@@ -7,7 +7,7 @@ $modelname "vaultpolice_animations.mdl"
 
 // Must be included
 $include "BaseModel.qci"
-$include "hl2mp_ported_anims/commonbones.qci"
+$include "ez2_vaultpolice_definebones.qci"
 $include "hl2mp_ported_anims/weaponmacros.qci"
 $include "hl2mp_ported_anims/player_macros.qci"
 $include "GenericWeightlists.qci"
