@@ -6,7 +6,7 @@ $include "hl2mp_ported_anims/standardikchains.qci"
 $include "ez2_gonome_definebones.qci"
 
 $attachment "blend_attachment_head" "ValveBiped.Bip01_Head1" 0 0 0 rotate 180 0 180
-$attachment "forward" "ValveBiped.Bip01_Spine3" -2.00 0.00 -0.00 rotate -0 75 90
+$attachment "forward" "ValveBiped.Bip01_Spine3" -2.00 0.00 -0.00 rotate -0 50 90
 
 $ikchain "rhand" "ValveBiped.Bip01_R_Hand" knee 0.707 0.707 0
 $ikchain "lhand" "ValveBiped.Bip01_L_Hand" knee 0.707 0.707 0
@@ -536,6 +536,28 @@ $sequence "gonome_stomp_gib" {
 	ikrule "lfoot" footstep
 }
 
+$sequence "gonome_throw_bullsquid" {
+	"ez2_gonome_anims\custom\gonome_throw_bullsquid.dmx"
+	{ event AE_CL_PLAYSOUND 10 "Flesh.ImpactHard" }
+	{ event AE_CL_PLAYSOUND 22 "Gonome.FootstepLeft" }
+	{ event AE_CL_PLAYSOUND 26 "Gonome.Attack" }
+	{ event AE_CL_PLAYSOUND 50 "Breakable.Flesh" }
+	{ event AE_CL_PLAYSOUND 72 "Zombie.AttackMiss" }
+	{ event AE_CL_PLAYSOUND 75 "Flesh.Break" }
+	fps 30 angles 90 0 0
+	ikrule "rfoot" footstep
+	ikrule "lfoot" footstep range 0 0 14 16
+	ikrule "lfoot" footstep range 20 22 30 34
+	ikrule "lfoot" footstep range 55 58 91 91
+	walkframe 11 LX LY
+	walkframe 23 LX LY
+	walkframe 43 LX LY
+	walkframe 48 LX LY
+	walkframe 68 LX LY
+	walkframe 77 LX LY
+	walkframe 91 LX LY
+}
+
 $KeyValues
 {
 	dynamic_interactions
@@ -604,6 +626,17 @@ $KeyValues
 			"delay" "15.0"
 			"dont_teleport_at_end" "both"
 			"their_healthfrac" "<=0.5"
+		}
+		"gonome_throw_bullsquid" 
+		{
+			"trigger" "auto_in_combat"
+			"origin_relative" "80 0 0"
+			"angles_relative" "0 180 0"
+			"origin_max_delta" "1024"
+			"sequence" "gonome_throw_bullsquid"
+			"delay" "25.0"
+			"dont_teleport_at_end" "both"
+			"their_healthfrac" "<=0.65"
 		}
 	}
 }
