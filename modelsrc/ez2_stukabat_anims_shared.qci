@@ -1,0 +1,186 @@
+
+
+$sequence "ragdoll" {
+	"ez2_stukabat_anims\ragdoll.smd"
+	activity "ACT_DIERAGDOLL" 1
+	fps 12
+}
+
+$sequence "Land_ceiling" {
+	"ez2_stukabat_anims\Land_ceiling.smd"
+	activity "ACT_LAND_CEILING" 1
+	fps 12
+}
+
+$sequence "Land_ground" {
+	"ez2_stukabat_anims\Land_ground.smd"
+	activity "ACT_LAND" 1
+	fps 60
+}
+
+$sequence "Attack_bomb" {
+	"ez2_stukabat_anims\Attack_bomb.smd"
+	activity "ACT_RANGE_ATTACK1" 1
+	fps 20
+}
+
+$sequence "Attack_claw" {
+	"ez2_stukabat_anims\Attack_claw.smd"
+	fps 12
+}
+
+$sequence "Dive_cycler" {
+	"ez2_stukabat_anims\Dive_cycler.smd"
+	activity "ACT_RANGE_ATTACK2" 1
+	fps 15
+}
+
+$sequence "Death_fall_simple" {
+	"ez2_stukabat_anims\Death_fall_simple.smd"
+	activity "ACT_DIESIMPLE" 1
+	fps 12
+}
+
+$sequence "Death_fall_violent" {
+	"ez2_stukabat_anims\Death_fall_violent.smd"
+	activity "ACT_DIEVIOLENT" 1
+	fps 12
+}
+
+$sequence "fall_cycler" {
+	"ez2_stukabat_anims\fall_cycler.smd"
+	activity "ACT_FALL" 1
+	fps 15
+}
+
+$sequence "Flinch_big" {
+	"ez2_stukabat_anims\Flinch_big.smd"
+	activity "ACT_BIG_FLINCH" 1
+	fps 12
+}
+
+$sequence "Flinch_small" {
+	"ez2_stukabat_anims\Flinch_small.smd"
+	activity "ACT_SMALL_FLINCH" 1
+	fps 12
+}
+
+$sequence "Flying_cycler" {
+	"ez2_stukabat_anims\Flying_cycler.smd"
+	activity "ACT_FLY" 1
+	{ event AE_FLYING_PREDATOR_FLAP_WINGS 16 "" }
+	fps 35
+	loop
+}
+
+$sequence "Flying_turn_left" {
+	"ez2_stukabat_anims\Flying_turn_left.smd"
+	activity "ACT_FLY_LEFT" 1
+	fps 12
+}
+
+$sequence "Flying_turn_right" {
+	"ez2_stukabat_anims\Flying_turn_right.smd"
+	activity "ACT_FLY_RIGHT" 1
+	fps 12
+}
+
+$sequence "Hover" {
+	"ez2_stukabat_anims\Hover.smd"
+	activity "ACT_HOVER" 1
+	{ event AE_FLYING_PREDATOR_FLAP_WINGS 4 "" }
+	fps 30
+	loop
+}
+
+$sequence "Die_on_ground" {
+	"ez2_stukabat_anims\Die_on_ground.smd"
+	activity "ACT_DIESIMPLE" 1
+	fps 24
+}
+
+$sequence "Flinch_on_ground" {
+	"ez2_stukabat_anims\Flinch_on_ground.smd"
+	fps 12
+}
+
+$sequence "Eat_on_ground" {
+	"ez2_stukabat_anims\Eat_on_ground.smd"
+	activity "ACT_EAT" 1
+	fps 24
+	loop
+}
+
+$sequence "Disply_fidget_on_ground" {
+	"ez2_stukabat_anims\Disply_fidget_on_ground.smd"
+	activity "ACT_DETECT_SCENT" 1
+	fps 12
+	loop
+}
+
+$sequence "Subtle_fidget_on_ground" {
+	"ez2_stukabat_anims\Subtle_fidget_on_ground.smd"
+	activity "ACT_IDLE" 5
+	fps 12
+}
+
+$sequence "Ground_walk" {
+	"ez2_stukabat_anims\Ground_walk.smd"
+	activity "ACT_WALK" 1
+	fps 30
+	loop
+	walkframe 16 LX
+}
+
+$sequence "Subtle_fidget" {
+	"ez2_stukabat_anims\Subtle_fidget.smd"
+	activity "ACT_IDLE_CEILING" 5
+	fps 12
+	loop
+}
+
+$sequence "Preen_fidget" {
+	"ez2_stukabat_anims\Preen_fidget.smd"
+	activity "ACT_IDLE_CEILING" 1
+	fps 12
+}
+
+$sequence "Swing_fidget" {
+	"ez2_stukabat_anims\Swing_fidget.smd"
+	activity "ACT_IDLE_CEILING" 2
+	fps 12
+}
+
+$sequence "Take_off_from_land" {
+	"ez2_stukabat_anims\Take_off_from_land.smd"
+	activity "ACT_LEAP" 1
+	fps 30
+}
+
+// ----------------------------------------------------------------
+
+$animation "a_flying_cycler" "ez2_stukabat_anims\Flying_cycler.smd" fps 35
+$animation "a_hover" "ez2_stukabat_anims\Hover.smd" fps 30
+$sequence "ez2_flying_hover_blend" {
+	"a_hover"
+	"a_flying_cycler"
+	blendwidth 2
+	blend "fly_y" 0 1
+	//activity "ACT_FLY" 1
+	loop
+}
+
+$sequence "ez2_dive_start" {
+	"ez2_stukabat_anims\custom\ez2_dive_start.smd"
+	activity "ACT_DIVEBOMB_START" 1
+	{ event AE_FLYING_PREDATOR_FLAP_WINGS 4 "" }
+	{ event AE_FLYING_PREDATOR_FLAP_WINGS 12 "" }
+	{ event AE_FLYING_PREDATOR_FLAP_WINGS 20 "" }
+	{ event AE_FLYING_PREDATOR_BEGIN_DIVEBOMB 28 "" }
+	fps 45
+}
+
+$sequence "gonome_stomp_gib" {
+	"ez2_stukabat_anims\custom\gonome_stomp_gib.dmx"
+	fps 24 angles 90 0 0
+}
