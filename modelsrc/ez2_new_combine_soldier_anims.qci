@@ -19,3 +19,30 @@ $append gonome_swallow_human {
 $append gonome_swallow_human_layer {
 	fps 24 angles 90 0 0
 }
+
+// ----------------------------------------------------------------
+
+$sequence "alyx_antlion_fight1" {
+	"ez2_combine_soldier_anims\alyx_antlion_fight1.dmx"
+	activity "ACT_DI_ALYX_ANTLION" 1
+	//{ event AE_CL_PLAYSOUND 22 "Breakable.Flesh" }
+	//{ event AE_CL_PLAYSOUND 22 "BaseCombatCharacter.CorpseGib" }
+	{ event AE_NPC_WEAPON_FIRE 18 "0" }
+	{ event AE_NPC_WEAPON_FIRE 22 "0" }
+	{ event AE_NPC_HURT_INTERACTION_PARTNER 22 "THEM 100" }
+	fps 24 angles 90 0 0
+	ikrule "lhand" touch "ValveBiped.Bip01_R_Hand"
+	ikrule "rfoot" footstep range 0 0 0 3
+	ikrule "rfoot" footstep range 5 8 33 36
+	ikrule "rfoot" footstep range 37 40 40 40
+	ikrule "lfoot" footstep range 0 0 9 12
+	ikrule "lfoot" footstep range 31 34 40 40
+}
+
+$sequence "alyx_headcrab_stomp" {
+	"ez2_combine_soldier_anims\alyx_headcrab_stomp.dmx"
+	{ event AE_CL_PLAYSOUND 5 "BaseCombatCharacter.CorpseGib" }
+	{ event AE_CL_PLAYSOUND 10 "Breakable.Flesh" }
+	fps 24 angles 90 0 0
+	ikrule "lhand" touch "ValveBiped.Bip01_R_Hand"
+}

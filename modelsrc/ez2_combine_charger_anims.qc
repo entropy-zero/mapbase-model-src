@@ -323,12 +323,6 @@ $sequence "run_protected_all" {
 }
 // ================================================================
 
-$include "ez2_new_combine_soldier_anims.qci"
-
-$include "ez2_combine_grunt_anims_shared.qci"
-
-// ================================================================
-
 // Use our DI blending techniques to add a heal animation
 $MakeAdjustedAnimation Heal "male_shared_anims\Heal.smd" $Blend_SMD_Default$ 12 32 50
 //$MakeAdjustedDelta Heal "male_shared_anims\Heal.smd" $Blend_SMD_Default$ 50 30
@@ -338,3 +332,11 @@ $append Heal {
 }
 
 $include "SoldierAnimationNodes.qci"
+
+// ================================================================
+
+$include "ez2_new_combine_soldier_anims.qci"
+
+$include "ez2_combine_grunt_anims_shared.qci"
+
+// ================================================================
