@@ -4,8 +4,6 @@ $modelname "bullsquid_anims.mdl"
 $include "ez2_bullsquid_definebones.qci"
 $include "ez2_bullsquid_ikchains.qci"
 
-$attachment "mouth_particle" "Bip01 Head" -6 7 0 rotate 0 0 0
-
 // ----------------------------------------------------------------
 
 $definevariable FootstepSound "NPC_Bullsquid"
@@ -23,7 +21,7 @@ $sequence "bullsquid_snatch_prey" {
 	{ event AE_CL_PLAYSOUND 16 "Flesh.Break" }
 	{ event AE_CL_PLAYSOUND 32 "Breakable.Flesh" }
 	{ event AE_PREDATOR_SWALLOW_INTERACTION_PARTNER 32 "" } // AE_PREDATOR_GIB_INTERACTION_PARTNER
-	{ event AE_CL_CREATE_PARTICLE_EFFECT 32 "headcrab_gib follow_attachment mouth_particle" } // Must do this on bullsquid because interaction partner doesn't rise
+	{ event AE_CL_CREATE_PARTICLE_EFFECT 32 "headcrab_gib follow_attachment mouth" } // Must do this on bullsquid because interaction partner doesn't rise
 	fps 24 angles 0 0 -90
 	walkframe 8 LX LY
 	walkframe 47 LX LY
@@ -37,7 +35,9 @@ $sequence $SeqName$ { \\
 	{ event AE_CL_PLAYSOUND 17 "NPC_Bullsquid.RunFootstepLeft" } \\
 	{ event AE_CL_PLAYSOUND 22 "NPC_Bullsquid.Bite" } \\
 	{ event AE_CL_PLAYSOUND 38 "Flesh.Break" } \\
+	{ event AE_CL_CREATE_PARTICLE_EFFECT 38 "headcrab_gib follow_attachment mouth" } \\
 	{ event AE_CL_PLAYSOUND 50 "Breakable.Flesh" } \\
+	{ event AE_CL_CREATE_PARTICLE_EFFECT 50 "headcrab_gib follow_attachment mouth" } \\
 	{ event AE_PREDATOR_SWALLOW_INTERACTION_PARTNER 52 "" } \\
 	fps 24 angles 0 0 -90 \\
 	walkframe 26 LX LY \\
@@ -64,12 +64,12 @@ $sequence "bullsquid_tackle_zombie" {
 	"ez2_bullsquid_anims\custom\bullsquid_tackle_zombie.dmx"
 	{ event AE_CL_PLAYSOUND 5 "NPC_Bullsquid.Growl" }
 	{ event AE_CL_PLAYSOUND 26 "NPC_Bullsquid.RunFootstepLeft" }
-	{ event AE_CL_PLAYSOUND 50 "NPC_Bullsquid.PullHeadcrab" }
+	{ event AE_CL_PLAYSOUND 48 "NPC_Bullsquid.PullHeadcrab" }
 	{ event AE_CL_PLAYSOUND 60 "Flesh.Break" }
 	{ event AE_BULLSQUID_EAT_HEADCRAB_OFF_ZOMBIE 60 "" }
-	{ event AE_CL_CREATE_PARTICLE_EFFECT 60 "headcrab_gib follow_attachment mouth_particle" }
+	{ event AE_CL_CREATE_PARTICLE_EFFECT 60 "headcrab_gib follow_attachment mouth" }
 	{ event AE_CL_PLAYSOUND 72 "Breakable.Flesh" }
-	{ event AE_CL_CREATE_PARTICLE_EFFECT 72 "headcrab_gib follow_attachment mouth_particle" }
+	{ event AE_CL_CREATE_PARTICLE_EFFECT 72 "headcrab_gib follow_attachment mouth" }
 	fps 30 angles 0 0 -90
 	walkframe 5 LX LY
 	walkframe 32 LX LY
@@ -78,21 +78,29 @@ $sequence "bullsquid_tackle_zombie" {
 	walkframe 90 LX LY
 }
 
+$sequence "bullsquid_tailslam_stukabat" {
+	"ez2_bullsquid_anims\custom\bullsquid_tailslam_stukabat.dmx"
+	{ event AE_CL_PLAYSOUND 4 "NPC_Bullsquid.Growl" }
+	{ event AE_CL_PLAYSOUND 8 "NPC_Bullsquid.Bite" }
+	{ event AE_CL_PLAYSOUND 16 "Flesh.ImpactHard" }
+	fps 24 angles 0 0 -90
+	walkframe 8 LX LY
+	walkframe 18 LX LY
+	walkframe 28 LX LY
+}
+
 // ----------------------------------------------------------------
 
-$definemacro PouncePreyKV SeqName Origin Angles \\
-		$SeqName$ \\
-		{ \\
-			"trigger" "auto_in_combat" \\
-			"origin_relative" $Origin$ \\
-			"angles_relative" $Angles$ \\
-			"origin_max_delta" "576" \\
-			"angles_max_diff" "45" \\
-			"sequence" $SeqName$ \\
-			"delay" "10.0" \\
-			"dont_teleport_at_end" "both" \\
-			"related_interactions" "bullsquid_pounce_prey*" \\
-		} \\
+$sequence "gonome_throw_bullsquid" {
+	"ez2_bullsquid_anims\custom\gonome_throw_bullsquid.dmx"
+	{ event AE_CL_PLAYSOUND 6 "NPC_Bullsquid.Growl" }
+	{ event AE_CL_PLAYSOUND 10 "NPC_Bullsquid.Bite" }
+	{ event AE_CL_PLAYSOUND 50 "NPC_Bullsquid.Pain" }
+	{ event AE_NPC_HURT_INTERACTION_PARTNER 74 "ME 200" }
+	fps 30 angles 0 0 -90
+}
+
+// ----------------------------------------------------------------
 
 $KeyValues
 {
@@ -108,15 +116,19 @@ $KeyValues
 			"delay" "10.0"
 			"dont_teleport_at_end" "both"
 		}
-		
-		$PouncePreyKV "bullsquid_pounce_prey" "180 0 0" "0 180 0"
-		$PouncePreyKV "bullsquid_pounce_prey_s" "196 0 0" "0 0 0"
-		$PouncePreyKV "bullsquid_pounce_prey_se" "196 0 0" "0 315 0"
-		$PouncePreyKV "bullsquid_pounce_prey_e" "180 0 0" "0 270 0"
-		$PouncePreyKV "bullsquid_pounce_prey_ne" "180 0 0" "0 225 0"
-		$PouncePreyKV "bullsquid_pounce_prey_nw" "180 0 0" "0 135 0"
-		$PouncePreyKV "bullsquid_pounce_prey_w" "180 0 0" "0 90 0"
-		$PouncePreyKV "bullsquid_pounce_prey_sw" "196 0 0" "0 45 0"
+
+		"bullsquid_pounce_prey"
+		{
+			"trigger" "auto_in_combat"
+			"origin_relative" "180 0 0"
+			//"angles_relative" "0 180 0"
+			"origin_max_delta" "576"
+			//"angles_max_diff" "45"
+			"sequence" $SeqName$
+			"delay" "10.0"
+			"dont_teleport_at_end" "both"
+			//"related_interactions" "bullsquid_pounce_prey*"
+		}
 		
 		"bullsquid_tackle_zombie"
 		{
@@ -127,6 +139,19 @@ $KeyValues
 			"sequence" "bullsquid_tackle_zombie"
 			"delay" "15.0"
 			"dont_teleport_at_end" "both"
+		}
+		
+		"bullsquid_tailslam_stukabat"
+		{
+			"trigger" "auto_in_combat"
+			"origin_relative" "96 0 56"
+			"angles_relative" "0 180 0"
+			"origin_max_delta" "1024"
+			"angles_max_diff" "8"
+			"sequence" "bullsquid_tailslam_stukabat"
+			"delay" "15.0"
+			"dont_teleport_at_end" "both"
+			"their_flystate" "4" // FlyState_Flying
 		}
 	}
 }

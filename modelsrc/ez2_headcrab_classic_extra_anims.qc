@@ -54,26 +54,79 @@ $declaresequence "alyx_headcrab_stomp"
 
 // ----------------------------------------------------------------
 
-$definemacro PouncePreySeq SeqName \\
-$sequence $SeqName$ { \\
-	"ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" \\
-	{ event AE_CL_PLAYSOUND 24 "NPC_HeadCrab.Pain" } \\
-	fps 24 \\
-} \\
-$continue $SeqName$
+$animation "generic_interaction_yaw_blend_c" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 0
+$animation "generic_interaction_yaw_blend_n" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 0 subtract "generic_interaction_yaw_blend_c" 0
+$animation "generic_interaction_yaw_blend_ne" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 315 subtract "generic_interaction_yaw_blend_c" 0
+$animation "generic_interaction_yaw_blend_e" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 270 subtract "generic_interaction_yaw_blend_c" 0
+$animation "generic_interaction_yaw_blend_se" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 225 subtract "generic_interaction_yaw_blend_c" 0
+$animation "generic_interaction_yaw_blend_s" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 180 subtract "generic_interaction_yaw_blend_c" 0
+$animation "generic_interaction_yaw_blend_sw" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 135 subtract "generic_interaction_yaw_blend_c" 0
+$animation "generic_interaction_yaw_blend_w" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 90 subtract "generic_interaction_yaw_blend_c" 0
+$animation "generic_interaction_yaw_blend_nw" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 45 subtract "generic_interaction_yaw_blend_c" 0
 
-$PouncePreySeq bullsquid_pounce_prey angles 90 0 0
-$PouncePreySeq bullsquid_pounce_prey_s angles 90 0 180 origin 0 0 -16 blendlayer "IdleB" 0 0 0 12
-$PouncePreySeq bullsquid_pounce_prey_se angles 90 0 225 origin 0 0 -16 blendlayer "IdleB" 0 0 0 6
-$PouncePreySeq bullsquid_pounce_prey_e angles 90 0 270 blendlayer "IdleB" 0 0 0 6
-$PouncePreySeq bullsquid_pounce_prey_ne angles 90 0 315 blendlayer "IdleB" 0 0 0 6
-$PouncePreySeq bullsquid_pounce_prey_nw angles 90 0 45 blendlayer "IdleB" 0 0 0 6
-$PouncePreySeq bullsquid_pounce_prey_w angles 90 0 90 blendlayer "IdleB" 0 0 0 12
-$PouncePreySeq bullsquid_pounce_prey_sw angles 90 0 135 origin 0 0 -16 blendlayer "IdleB" 0 0 0 12
+$sequence "generic_interaction_yaw_blend_layer" {
+	"generic_interaction_yaw_blend_s"
+	"generic_interaction_yaw_blend_se"
+	"generic_interaction_yaw_blend_e"
+	"generic_interaction_yaw_blend_ne"
+	"generic_interaction_yaw_blend_n"
+	"generic_interaction_yaw_blend_nw"
+	"generic_interaction_yaw_blend_w"
+	"generic_interaction_yaw_blend_sw"
+	"generic_interaction_yaw_blend_s"
+	fps 24
+	blend "interaction_relative_yaw" -180 180
+	blendwidth 9
+	//walkframe 15 LZ
+	delta
+}
+
+// ----------------------------------------------------------------
 
 $sequence "bullsquid_snatch_prey" {
 	"ez2_headcrab_classic_anims\bullsquid_snatch_prey.dmx"
 	{ event AE_CL_PLAYSOUND 6 "NPC_HeadCrab.Pain" }
 	fps 24 angles 90 0 0
+	blendlayer "generic_interaction_yaw_blend_layer" 0 20 47 47 spline
+	//walkframe 15 LZ
+}
+
+// ----------------------------------------------------------------
+
+$animation "bullsquid_pounce_prey_blend_n" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 0
+$animation "bullsquid_pounce_prey_blend_ne" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 315
+$animation "bullsquid_pounce_prey_blend_e" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 270
+$animation "bullsquid_pounce_prey_blend_se" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 225
+$animation "bullsquid_pounce_prey_blend_s" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 180
+$animation "bullsquid_pounce_prey_blend_sw" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 135
+$animation "bullsquid_pounce_prey_blend_w" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 90
+$animation "bullsquid_pounce_prey_blend_nw" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 45
+
+$sequence "bullsquid_pounce_prey_blend_idle_layer" {
+	"ez2_headcrab_classic_anims/ragdoll.smd"
+	fps 24 noanimation numframes 65
+	blendlayer "IdleB" 0 0 0 12
+	hidden
+}
+
+//$poseparameter interaction_relative_yaw -180 180 wrap
+
+$sequence "bullsquid_pounce_prey" {
+	"bullsquid_pounce_prey_blend_n"
+	"bullsquid_pounce_prey_blend_nw"
+	"bullsquid_pounce_prey_blend_w"
+	"bullsquid_pounce_prey_blend_sw"
+	"bullsquid_pounce_prey_blend_s"
+	"bullsquid_pounce_prey_blend_se"
+	"bullsquid_pounce_prey_blend_e"
+	"bullsquid_pounce_prey_blend_ne"
+	"bullsquid_pounce_prey_blend_n"
+	{ event AE_CL_PLAYSOUND 6 "NPC_HeadCrab.Pain" }
+	fps 24
+	blendlayer "IdleB" 0 0 0 6 spline
+	blendlayer "bullsquid_pounce_prey_blend_idle_layer" -135 -90 0 0 poseparameter interaction_relative_yaw
+	blendlayer "bullsquid_pounce_prey_blend_idle_layer" 0 0 0 45 poseparameter interaction_relative_yaw
+	blend "interaction_relative_yaw" -180 180
+	blendwidth 9
 	//walkframe 15 LZ
 }
