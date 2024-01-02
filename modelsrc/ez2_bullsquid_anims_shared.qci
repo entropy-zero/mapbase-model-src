@@ -1,4 +1,29 @@
 
+$attachment "blend_attachment_head" "Bip01 Head" 0 0 0 rotate 0 0 0
+//$attachment "forward" "Bip01 Pelvis" -14.00 10.00 0.00 rotate 0 0 0
+
+$animation "body_turn_neutral" "custom\body_turn_matrix.smd" frame 0 0
+$animation "body_turn_mid" "custom\body_turn_matrix.smd" frame 0 0 subtract "body_turn_neutral" 0
+$animation "body_turn_e" "custom\body_turn_matrix.smd" frame 1 1 subtract "body_turn_neutral" 0
+$animation "body_turn_w" "custom\body_turn_matrix.smd" frame 2 2 subtract "body_turn_neutral" 0
+$animation "body_turn_s" "custom\body_turn_matrix.smd" frame 3 3 subtract "body_turn_neutral" 0
+$animation "body_turn_n" "custom\body_turn_matrix.smd" frame 4 4 subtract "body_turn_neutral" 0
+$animation "body_turn_se" "custom\body_turn_matrix.smd" frame 5 5 subtract "body_turn_neutral" 0
+$animation "body_turn_ne" "custom\body_turn_matrix.smd" frame 6 6 subtract "body_turn_neutral" 0
+$animation "body_turn_sw" "custom\body_turn_matrix.smd" frame 7 7 subtract "body_turn_neutral" 0
+$animation "body_turn_nw" "custom\body_turn_matrix.smd" frame 8 8 subtract "body_turn_neutral" 0
+
+$sequence "body_turn" {
+	body_turn_se	body_turn_s   	body_turn_sw
+	body_turn_e    	body_turn_mid  	body_turn_w
+	body_turn_ne   	body_turn_n   	body_turn_nw
+	
+	blendwidth 3
+ 	calcblend aim_yaw "blend_attachment_head" YR  
+ 	calcblend aim_pitch "blend_attachment_head" ZR
+	delta //autoplay
+}
+
 // ----------------------------------------------------------------
 // Stock animations (based on $pushd)
 // ----------------------------------------------------------------
@@ -20,7 +45,7 @@ $sequence "walk" {
 
 $sequence "run" {
 	"run.smd"
-	activity "ACT_RUN" 1
+	//activity "ACT_RUN" 1
 	{ event 6004 7 $FootstepSound$ }
 	{ event 6005 17 $FootstepSound$ }
 	{ event 6004 26 $FootstepSound$ }
@@ -34,6 +59,79 @@ $sequence "run" {
 	ikrule "lfoot" footstep range 33 36 36 36
 }
 
+$animation "a_run_n" "run.smd" {
+	ikrule "lfoot" footstep range 0 0 2 4
+	ikrule "rfoot" footstep range 5 8 10 13
+	ikrule "lfoot" footstep range 15 18 21 23
+	ikrule "rfoot" footstep range 24 27 29 32
+	ikrule "lfoot" footstep range 33 36 36 36
+	walkframe 36 LX
+}
+$animation "a_run_e" "custom/run_e.dmx" angles 0 0 -90 fps 24 {
+	ikrule "lfoot" footstep range 0 0 2 4
+	ikrule "rfoot" footstep range 2 3 7 8
+	ikrule "lfoot" footstep range 14 16 18 19
+	ikrule "rfoot" footstep range 15 16 17 18
+	ikrule "lfoot" footstep range 23 24 28 28
+	walkframe 28 LY
+}
+$definevariable run_s_offset "-351.76"
+$animation "a_run_s" "custom/run_s.smd" {
+	ikrule "lfoot" footstep range 0 0 2 4
+	ikrule "rfoot" footstep range 5 8 10 13
+	ikrule "lfoot" footstep range 15 18 21 23
+	ikrule "rfoot" footstep range 24 27 29 32
+	ikrule "lfoot" footstep range 33 36 36 36
+	walkframe 36 LX
+	origin 0 $run_s_offset$ 0
+}
+$animation "a_run_w" "custom/run_w.dmx" angles 0 0 -90 fps 24 {
+	ikrule "lfoot" footstep range 0 0 2 4
+	ikrule "rfoot" footstep range 2 3 7 8
+	ikrule "lfoot" footstep range 14 16 18 19
+	ikrule "rfoot" footstep range 15 16 17 18
+	ikrule "lfoot" footstep range 23 24 28 28
+	walkframe 28 LY
+}
+
+$sequence "run_blend" {
+	"a_run_s"
+	"a_run_e"
+	"a_run_n"
+	"a_run_w"
+	"a_run_s"
+	blend "move_yaw" -180 180
+	blendwidth 5
+	activity "ACT_RUN" 1
+	{ event 6004 7 $FootstepSound$ }
+	{ event 6005 17 $FootstepSound$ }
+	{ event 6004 26 $FootstepSound$ }
+	{ event 6005 35 $FootstepSound$ }
+	loop
+	addlayer "body_turn"
+}
+
+$weightlist weapongesture_bodyonly "Bip01" 1.0 "Bip01 Pelvis" 0.75 "Bip01 L Thigh" 0.0 "Bip01 R Thigh" 0.0 "Bip01 Spine" 0.5 "Bip01 Spine1" 0.0
+$weightlist weapongesture_mouth "Bip01" 0.0 "Bip01 Spine" 0.5 "Bip01 Spine1" 1.0
+
+$definemacro makeweapongesturefull gesturename filename InFrame OutFrame LastFrame \\
+$sequence $gesturename$spine $filename$ fps 30 weightlist weapongesture_bodyonly subtract $gesturename$spine 0 delta hidden \\
+$sequence $gesturename$arms $filename$ fps 30 weightlist weapongesture_mouth hidden \\
+$sequence $gesturename$ { \\
+	$filename$ noanimation numframes $LastFrame$ \\
+	blendlayer $gesturename$arms 0 $InFrame$ $outFrame$ $LastFrame$ spline \\
+	blendlayer $gesturename$spine 0 $InFrame$ $outFrame$ $LastFrame$ spline \\
+	iklock rfoot 1 0 iklock lfoot 1 0 \\
+} \\
+$continue $gesturename$
+
+$makeweapongesturefull "g_range" "range.smd" 10 21 35
+{
+	activity "ACT_GESTURE_RANGE_ATTACK1" 1
+	{ event 1 11 "" }
+	fps 30
+}
+
 $sequence "suprisedhop" {
 	"suprisedhop.smd"
 	activity "ACT_HOP" 1
@@ -44,21 +142,25 @@ $sequence "suprisedhop" {
 $sequence "flinchs" {
 	"flinchs.smd"
 	activity "ACT_SMALL_FLINCH" 1
+	addlayer "body_turn"
 }
 
 $sequence "flinchb" {
 	"flinchb.smd"
 	activity "ACT_BIG_FLINCH" 1
+	addlayer "body_turn"
 }
 
 $sequence "turnleft" {
 	"turnleft.smd"
 	activity "ACT_TURN_LEFT" 1
+	addlayer "body_turn"
 }
 
 $sequence "turnright" {
 	"turnright.smd"
 	activity "ACT_TURN_RIGHT" 1
+	addlayer "body_turn"
 }
 
 $sequence "idle" {
@@ -67,6 +169,7 @@ $sequence "idle" {
 	fps 15
 	loop
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "whip" {
@@ -74,6 +177,7 @@ $sequence "whip" {
 	activity "ACT_MELEE_ATTACK1" 1
 	{ event 8 23 "" }
 	{ event 4 23 "" }
+	addlayer "body_turn"
 }
 
 $sequence "bite" {
@@ -81,12 +185,15 @@ $sequence "bite" {
 	activity "ACT_MELEE_ATTACK2" 1
 	{ event 2 7 "{" }
 	{ event 6 10 "" }
+	addlayer "body_turn"
 }
 
 $sequence "range" {
 	"range.smd"
 	activity "ACT_RANGE_ATTACK1" 1
 	{ event 1 11 "" }
+	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "look" {
@@ -102,6 +209,7 @@ $sequence "seecrab" {
 	activity "ACT_SQUID_EXCITED" 1
 	fps 17
 	cmdlist lockfeet
+	addlayer "body_turn"
 }
 
 $sequence "eat" {
@@ -190,10 +298,8 @@ $sequence "squidfall" {
 	cmdlist releasefeet
 }
 
+// ----------------------------------------------------------------
+// Custom animations
+// ----------------------------------------------------------------
+
 $popd
-
-// ----------------------------------------------------------------
-// Custom animations (based on $lockbonelengths)
-// ----------------------------------------------------------------
-
-
