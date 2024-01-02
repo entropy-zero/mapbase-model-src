@@ -6,8 +6,11 @@ $include "ez2_bullsquid_ikchains.qci"
 
 $definevariable FootstepSound "NPC_Babysquid"
 
-$pushd "ez2_babysquid_anims" // $popd handled by included file
+$definevariable run_s_offset "-175.88"
+$scale 0.5
+$pushd "ez2_bullsquid_anims" // $popd handled by included file
 $include "ez2_bullsquid_anims_shared.qci"
+$scale 1.0
 
 // NOTE: Any regular bullsquid animations can be converted to babysquid by using "$scale 0.5"
 // Keep this in mind for any future application
