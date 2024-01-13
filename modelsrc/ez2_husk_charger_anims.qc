@@ -5,6 +5,9 @@ $cdmaterials "models\zombie_soldier\"
 
 $definevariable FootstepSound "NPC_HuskCharger"
 
+$definevariable DefaultAnimScale 1.025
+$definevariable CitizenAnimScale 1.17875
+
 $include "ez2_charger_definebones.qci"
 
 $lockbonelengths

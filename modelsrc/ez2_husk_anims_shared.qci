@@ -46,3 +46,46 @@ $append melee_swing_gesture {
 $popd
 
 $include "ez2_husk_anims_shared_zombine.qci"
+
+// ----------------------------------------------------------------
+
+// Laying down anims from citizens
+
+$cmdlist handstothighs {
+	ikrule "rhand" touch "ValveBiped.Bip01_R_Thigh"
+	ikrule "lhand" touch "ValveBiped.Bip01_L_Thigh"
+}
+
+$sequence "d1_town05_Winston_Down" "male_ss_anims\d1_town05_Winston_Down.smd" loop
+$scale $CitizenAnimScale$
+$sequence "d1_town05_Wounded_Idle_1" "male_ss_anims\d1_town05_Wounded_Idle_1.smd" loop
+$sequence "d1_town05_Wounded_Idle_2" "male_ss_anims\d1_town05_Wounded_Idle_2.smd" loop
+$scale $DefaultAnimScale$
+
+$sequence "sitchair1" "male_ss_anims\sitchair1.smd" loop cmdlist handstothighs
+$sequence "sitchairtable1" "male_ss_anims\sitchairtable1.smd" loop cmdlist handstothighs
+$sequence "sitcouchfeet1" "male_ss_anims\sitcouchfeet1.smd" loop cmdlist handstothighs
+$sequence "sitcouchknees1" "male_ss_anims\sitcouchknees1.smd" loop cmdlist handstothighs
+$sequence "sitcouch1" "male_ss_anims\sitcouch1.smd" loop cmdlist handstothighs
+$sequence "sitccouchtv1" "male_ss_anims\sitccouchtv1.smd" loop cmdlist handstothighs
+$sequence "laycouch1" "male_ss_anims\laycouch1.smd" loop cmdlist handstothighs
+$sequence "laycouch1_exit" "male_ss_anims\laycouch1_exit.smd"
+
+$sequence "Lying_Down" "male_ss_anims\Lying_Down.smd"
+
+//$scale $CitizenAnimScale$
+$sequence "injured1" "male_shared_anims\injured1.smd" loop
+$sequence "injured1preidle" "male_shared_anims\injured1preidle.smd" loop
+$sequence "injured1postidle" "male_shared_anims\injured1postidle.smd" loop
+$sequence "injured3" "male_shared_anims\injured3.smd" loop
+//$scale $DefaultAnimScale$
+$sequence "injured4" "male_shared_anims\injured4.smd" loop
+$sequence "injured4_standing" "male_shared_anims\injured4_standing.smd" walkframe 51 LX LY
+$sequence "injured4_sit" "male_shared_anims\injured4_sit.smd" walkframe 51 LX LY
+$sequence "injured4_sitpostidle" "male_shared_anims\injured4_sitpostidle.smd"
+
+$scale $CitizenAnimScale$
+$sequence "sniper_victim_pre" "male_ss_anims\sniper_victim_pre.smd" loop
+$sequence "sniper_victim_die" "male_ss_anims\sniper_victim_die.smd"
+$sequence "sniper_victim_post" "male_ss_anims\sniper_victim_post.smd" loop
+$scale $DefaultAnimScale$
