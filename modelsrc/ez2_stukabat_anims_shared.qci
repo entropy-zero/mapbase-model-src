@@ -32,6 +32,7 @@ $sequence "Attack_claw" {
 $sequence "Dive_cycler" {
 	"ez2_stukabat_anims\Dive_cycler.smd"
 	activity "ACT_RANGE_ATTACK2" 1
+	loop
 	fps 15
 }
 
