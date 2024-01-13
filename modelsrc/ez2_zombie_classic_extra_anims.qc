@@ -77,18 +77,16 @@ $sequence "bullsquid_tackle_zombie" {
 	{ event AE_CL_PLAYSOUND 50 "Zombie.Pain" }
 }
 
+$sequence "grunt_pushdown_zombie" {
+	"ez2_zombie_classic_anims\grunt_pushdown_zombie.dmx"
+	fps 30 angles 90 0 0
+	{ event AE_CL_PLAYSOUND 5 "Zombie.Alert" }
+	{ event AE_CL_PLAYSOUND 28 "Zombie.Pain" }
+	{ event AE_CL_PLAYSOUND 36 "AI_BaseNPC.BodyDrop_Heavy" }
+	{ event AE_ZOMBIE_POPHEADCRAB 54 "ValveBiped.Bip01_L_Foot 500" }
+}
+
 // ----------------------------------------------------------------
-
-// TEMP
-$definevariable Blend_SMD_Default "ez2_zombie_classic_anims\Idle01.smd"
-$definevariable Blend_SMD_Unarmed "ez2_zombie_classic_anims\Idle01.smd"
-$definevariable Blend_SMD_Panicked "ez2_zombie_classic_anims\Idle01.smd"
-$definevariable Blend_SMD_Pistol "ez2_zombie_classic_anims\Idle01.smd"
-$definevariable Blend_SMD_Rifle "ez2_zombie_classic_anims\Idle01.smd"
-$definevariable Blend_SMD_Rifle_Crouched "ez2_zombie_classic_anims\Idle01.smd"
-
-//$include "BaseDI.qci"
-//$include "HunterRecvDI.qci"
 
 $sequence "hunter_cit_throw_ground" {
 	"ez2_zombie_classic_anims\hunter_cit_throw_ground.dmx"
@@ -97,9 +95,3 @@ $sequence "hunter_cit_throw_ground" {
 	{ event AE_CL_PLAYSOUND 19 "Zombie.Pain" }
 	{ event AE_CL_PLAYSOUND 45 "Zombie.Pain" }
 }
-
-//$sequence "vort_antlion_ground_nohurt" {
-//	"vortigaunt_anims_ep2\vort_antlion_ground.smd"
-//	{ event AE_CL_PLAYSOUND 27 "AI_BaseNPC.BodyDrop_Heavy" }
-//	{ event AE_CL_PLAYSOUND 50 "NPC_Vortigaunt.Kick" }
-//}

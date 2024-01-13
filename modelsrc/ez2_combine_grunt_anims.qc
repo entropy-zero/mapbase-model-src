@@ -323,5 +323,36 @@ $KeyValues
 	dynamic_interactions 
 	{
 		$DIKV_Alyx
+		
+		"alyx_v_antlion_fight1"		 
+		{
+			"trigger"			"auto_in_combat"
+			"origin_relative"			"82 0 0"
+			"angles_relative"			"0 180 0"
+			"origin_max_delta"			"256"
+			"activity"			"ACT_DI_ALYX_ANTLION"
+			"delay"			"10.0"
+			"needs_weapon"			"ME"
+			"weapon_mine"			"WEPCLASS_RIFLE"
+		}
+		"alyx_v_headcrab_stomp"		 
+		{
+			"trigger"			"auto_in_combat"
+			"origin_relative"			"36 0 0"
+			"sequence"			"alyx_headcrab_stomp"
+			"delay"			"10.0"
+		}
+		
+		"grunt_pushdown_zombie"
+		{
+			"trigger" "auto_in_combat"
+			"origin_relative" "64 0 0"
+			"angles_relative" "0 180 0"
+			"origin_max_delta" "64"
+			"sequence" "grunt_pushdown_zombie"
+			"delay" "20.0"
+			"needs_weapon" "ME"
+			"weapon_mine" "WEPCLASS_RIFLE"
+		}
 	}
 }

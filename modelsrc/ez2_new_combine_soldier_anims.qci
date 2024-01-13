@@ -46,3 +46,20 @@ $sequence "alyx_headcrab_stomp" {
 	fps 24 angles 90 0 0
 	ikrule "lhand" touch "ValveBiped.Bip01_R_Hand"
 }
+
+// ----------------------------------------------------------------
+
+$sequence "grunt_pushdown_zombie" {
+	"ez2_combine_grunt_anims\grunt_pushdown_zombie.dmx"
+	angles 90 0 0 fps 30
+	{ event AE_CL_PLAYSOUND 24 "Flesh.ImpactSoft" }
+	{ event AE_NPC_WEAPON_FIRE 50 "0" }
+	{ event AE_NPC_WEAPON_FIRE 54 "0" }
+	//{ event AE_NPC_HURT_INTERACTION_PARTNER 54 "THEM 100" }
+	ikrule "lhand" touch "ValveBiped.Bip01_R_Hand"
+	ikrule "lfoot" footstep
+	ikrule "rfoot" footstep range 0 0 0 3
+	ikrule "rfoot" footstep range 46 49 60 62
+	ikrule "rfoot" footstep range 66 69 69 69
+	blendlayer "Aim_stand_delta_all" 58 70 70 70 spline xfade
+}
