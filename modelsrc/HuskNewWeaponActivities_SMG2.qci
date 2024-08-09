@@ -4,9 +4,9 @@
 // 
 // ================================================================
 
-$GenericIdle "Idle1_SMG2" "combine_soldier_anims_anims\custom\Idle1_SMG2.smd" "ACT_IDLE_SMG2"
+$GenericIdle "Idle1_SMG2" "ez2_husk_anims\Idle01_SMG2.smd" "ACT_IDLE_SMG2" addlayer "idle_noise"
 
-$GenericCombatIdle "CombatIdle1_SMG2" "combine_soldier_anims_anims\custom\CombatIdle1_SMG2.smd" "ACT_IDLE_ANGRY_SMG2" "Aim_stand_delta_all"
+$GenericCombatIdle "CombatIdle1_SMG2" "ez2_husk_anims\HuskCombatIdle1_SMG2.smd" "ACT_IDLE_ANGRY_SMG2" "Aim_stand_delta_all"
 
 $GenericCombatIdle "crouch_aim_smg2" "combine_soldier_anims_anims\custom\crouch_aim_smg2.smd" "ACT_RANGE_AIM_SMG2_LOW" "Aim_crouch_delta_all"
 

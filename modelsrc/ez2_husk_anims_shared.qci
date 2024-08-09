@@ -21,6 +21,8 @@ $sequence "layer_run_husk_upperBody" {
 	weightlist "weights_layer_upperBody"
 }
 
+$sequence "layer_husk_idle1" "Idle01.smd" frame 0 0 hidden loop
+
 // ----------------------------------------------------------------
 
 $sequence "melee_swing" {
@@ -49,6 +51,18 @@ $include "ez2_husk_anims_shared_zombine.qci"
 
 // ----------------------------------------------------------------
 
+$sequence "husk_derelict_idle1" "ez2_husk_anims\husk_derelict_idle1.dmx" {
+	fps 24 angles 90 0 0
+	loop
+}
+
+$sequence "husk_derelict_idle2" "ez2_husk_anims\husk_derelict_idle2.dmx" {
+	fps 20 angles 90 0 90
+	loop
+}
+
+// ----------------------------------------------------------------
+
 // Laying down anims from citizens
 
 $cmdlist handstothighs {
@@ -64,9 +78,9 @@ $scale $DefaultAnimScale$
 
 $sequence "sitchair1" "male_ss_anims\sitchair1.smd" loop cmdlist handstothighs
 $sequence "sitchairtable1" "male_ss_anims\sitchairtable1.smd" loop cmdlist handstothighs
-$sequence "sitcouchfeet1" "male_ss_anims\sitcouchfeet1.smd" loop cmdlist handstothighs
-$sequence "sitcouchknees1" "male_ss_anims\sitcouchknees1.smd" loop cmdlist handstothighs
-$sequence "sitcouch1" "male_ss_anims\sitcouch1.smd" loop cmdlist handstothighs
+$sequence "sitcouchfeet1" "male_ss_anims\sitcouchfeet1.smd" loop cmdlist handstothighs cmdlist lockfeet numframes 360 addlayer "idle_noise"
+$sequence "sitcouchknees1" "male_ss_anims\sitcouchknees1.smd" loop cmdlist handstothighs cmdlist lockfeet numframes 360 addlayer "idle_noise"
+$sequence "sitcouch1" "male_ss_anims\sitcouch1.smd" loop cmdlist handstothighs cmdlist lockfeet numframes 360 addlayer "idle_noise"
 $sequence "sitccouchtv1" "male_ss_anims\sitccouchtv1.smd" loop cmdlist handstothighs
 $sequence "laycouch1" "male_ss_anims\laycouch1.smd" loop cmdlist handstothighs
 $sequence "laycouch1_exit" "male_ss_anims\laycouch1_exit.smd"
@@ -74,15 +88,15 @@ $sequence "laycouch1_exit" "male_ss_anims\laycouch1_exit.smd"
 $sequence "Lying_Down" "male_ss_anims\Lying_Down.smd"
 
 //$scale $CitizenAnimScale$
-$sequence "injured1" "male_shared_anims\injured1.smd" loop
+$sequence "injured1" "male_shared_anims\injured1.smd" loop cmdlist handstothighs cmdlist lockfeet numframes 360 addlayer "idle_noise"
 $sequence "injured1preidle" "male_shared_anims\injured1preidle.smd" loop
 $sequence "injured1postidle" "male_shared_anims\injured1postidle.smd" loop
 $sequence "injured3" "male_shared_anims\injured3.smd" loop
 //$scale $DefaultAnimScale$
-$sequence "injured4" "male_shared_anims\injured4.smd" loop
-$sequence "injured4_standing" "male_shared_anims\injured4_standing.smd" walkframe 51 LX LY
-$sequence "injured4_sit" "male_shared_anims\injured4_sit.smd" walkframe 51 LX LY
-$sequence "injured4_sitpostidle" "male_shared_anims\injured4_sitpostidle.smd"
+$sequence "injured4_sit" "male_shared_anims\injured4_sit.smd" walkframe 51 LX LY alignto "Idle1" blendlayer "layer_husk_idle1" 0 0 0 28 spline
+$sequence "injured4" "male_shared_anims\injured4.smd" loop //align "injured4_sit" X Y 51 0
+$sequence "injured4_standing" "male_shared_anims\injured4_standing.smd" walkframe 51 LX LY align "injured4_sit" X Y 51 0 blendlayer "layer_husk_idle1" 28 60 60 60 spline xfade
+$sequence "injured4_sitpostidle" "male_shared_anims\injured4_sitpostidle.smd" loop align "injured4_sit" X Y 51 0
 
 $scale $CitizenAnimScale$
 $sequence "sniper_victim_pre" "male_ss_anims\sniper_victim_pre.smd" loop

@@ -31,7 +31,7 @@ $AddNodeToSequence "crouch_aim_ar2" "crouching_ar2"
 $AddNodeToSequence "crouch_aim_sm1" "crouching_smg1"
 $AddNodeToSequence "crouch_aim_sg" "crouching_sg"
 
-$AddNodeToSequence "Idle1" "standing_ar2"
+$AddNodeToSequence "Idle1" "standing_ar1"
 $AddNodeToSequence "Idle_Unarmed_ACT_IDLE" "standing"
 $AddNodeToSequence "Idle1_AR2" "standing_ar2"
 $AddNodeToSequence "Idle1_SMG1" "standing_smg1"
@@ -119,22 +119,22 @@ $AddNodeToSequence "run_hold_pistol" "standing_pistol"
 // ----------------------------------------------------------------
 // SoldierNewWeaponActivities_AR1/SMG2/SniperRifle.qci
 // ----------------------------------------------------------------
-$AddNodeToSequence "CombatIdle1_AR1" "shooting_ar2"
-$AddNodeToSequence "crouch_aim_ar1" "crouching_ar2"
+$AddNodeToSequence "CombatIdle1_AR1" "shooting_ar1"
+$AddNodeToSequence "crouch_aim_ar1" "crouching_ar1"
 
-$AddNodeToSequence "reload_ar1" "shooting_ar2"
+$AddNodeToSequence "reload_ar1" "shooting_ar1"
 
-$AddNodeToSequence "shootAR1s" "shooting_ar2"
-$AddNodeToSequence "shootAR1c" "crouching_ar2"
+$AddNodeToSequence "shootAR1s" "shooting_ar1"
+$AddNodeToSequence "shootAR1c" "crouching_ar1"
 // ----------------------------------------------------------------
-$AddNodeToSequence "Idle1_SMG2" "standing_smg1"
-$AddNodeToSequence "CombatIdle1_SMG2" "shooting_smg1"
-$AddNodeToSequence "crouch_aim_smg2" "crouching_smg1"
+$AddNodeToSequence "Idle1_SMG2" "standing_smg2"
+$AddNodeToSequence "CombatIdle1_SMG2" "shooting_smg2"
+$AddNodeToSequence "crouch_aim_smg2" "crouching_smg2"
 
-$AddNodeToSequence "reload_smg2" "shooting_smg1"
+$AddNodeToSequence "reload_smg2" "shooting_smg2"
 
-$AddNodeToSequence "shootSMG2s" "shooting_smg1"
-$AddNodeToSequence "shootSMG2c" "crouching_smg1"
+$AddNodeToSequence "shootSMG2s" "shooting_smg2"
+$AddNodeToSequence "shootSMG2c" "crouching_smg2"
 // ----------------------------------------------------------------
 $AddNodeToSequence "Idle1_SR" "standing_ar2"
 $AddNodeToSequence "CombatIdle1_SR" "shooting_ar2"
