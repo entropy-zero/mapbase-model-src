@@ -124,7 +124,7 @@ $KeyValues
 			//"angles_relative" "0 180 0"
 			"origin_max_delta" "576"
 			//"angles_max_diff" "45"
-			"sequence" $SeqName$
+			"sequence" "bullsquid_pounce_prey"
 			"delay" "10.0"
 			"dont_teleport_at_end" "both"
 			//"related_interactions" "bullsquid_pounce_prey*"

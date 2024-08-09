@@ -83,6 +83,7 @@ $definemacro DIKV_Alyx \\
 		"delay" "20.0" \\
 		"needs_weapon" "ME" \\
 		"weapon_mine" "WEPCLASS_HANDGUN" \\
+		"their_health" "<100" \\
 	} \\
 	"alyx_v_zombie_rifle_180deg_64" \\
 	{ \\ 
@@ -94,6 +95,7 @@ $definemacro DIKV_Alyx \\
 		"delay" "20.0" \\ 
 		"needs_weapon" "ME" \\
 		"weapon_mine" "!=WEPCLASS_HANDGUN" \\
+		"their_health" "<100" \\
 	} \\
 	"alyx_v_zombie_180deg_64" \\
 	{ \\
@@ -103,6 +105,7 @@ $definemacro DIKV_Alyx \\
 		"angles_relative" "0 180 0" \\
 		"activity" "ACT_DI_ALYX_ZOMBIE_MELEE" \\
 		"delay" "10.0" \\
+		"their_health" "<100" \\
 	} \\
 
 

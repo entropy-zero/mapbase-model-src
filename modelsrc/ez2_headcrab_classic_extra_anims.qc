@@ -24,109 +24,36 @@ $definebone "HeadcrabClassic.CalfR_Bone" "HeadcrabClassic.ThighR_Bone" 6.098812 
 $definebone "HeadcrabClassic.ThighL_Bone" "HeadcrabClassic.HipControl" -0.000009 0 -6.164912 17.983584 -103.758053 173.796704 0 0 0 0 0 0
 $definebone "HeadcrabClassic.CalfL_Bone" "HeadcrabClassic.ThighL_Bone" 6.098812 0 0 0.000001 -0.040853 0.000001 0 0 0 0 0 0
 
-$declaresequence "Idle01"
-$declaresequence "IdleB"
-$declaresequence "Run1"
-$declaresequence "TurnLeft"
-$declaresequence "TurnRight"
-$declaresequence "jumpattack_broadcast"
-$declaresequence "Drown"
-$declaresequence "canal5b_sewer_jump"
-$declaresequence "headcrabbed"
-$declaresequence "headcrabbedpost"
-$declaresequence "BurrowIn"
-$declaresequence "BurrowOut"
-$declaresequence "BurrowIdle"
-$declaresequence "cannisterDeploy_A"
-$declaresequence "cannisterDeploy_B"
-$declaresequence "cannisterDeploy_C"
-$declaresequence "testDeploy_A"
-$declaresequence "testDeploy_b"
-$declaresequence "testDeploy_C"
-$declaresequence "ceiling_Idle"
-$declaresequence "ceiling_Detach"
-$declaresequence "ceiling_fall"
-$declaresequence "ceiling_land"
-$declaresequence "EP1_KCast_Lamarr_pre"
-$declaresequence "EP1_KCast_Lamarr"
-$declaresequence "ragdoll"
-$declaresequence "alyx_headcrab_stomp"
+$animblocksize 32
+
+$bonesaveframe "HeadcrabClassic.BodyControl" position rotation
+$bonesaveframe "HeadcrabClassic.SpineControl" rotation
+$bonesaveframe "HeadcrabClassic.HeadControl" rotation
+$bonesaveframe "HeadcrabClassic.FangL_Bone1" rotation
+$bonesaveframe "HeadcrabClassic.FangL_Bone2" rotation
+$bonesaveframe "HeadcrabClassic.FangR_Bone1" rotation
+$bonesaveframe "HeadcrabClassic.UpperArmL_Bone" rotation
+$bonesaveframe "HeadcrabClassic.ForeArmL_Bone" rotation
+$bonesaveframe "HeadcrabClassic.UpperArmR_Bone" rotation
+$bonesaveframe "HeadcrabClassic.ForeArmR_Bone" rotation
+$bonesaveframe "HeadcrabClassic.HipControl" rotation
+$bonesaveframe "HeadcrabClassic.ThighR_Bone" rotation
+$bonesaveframe "HeadcrabClassic.CalfR_Bone" rotation
+$bonesaveframe "HeadcrabClassic.ThighL_Bone" rotation
+$bonesaveframe "HeadcrabClassic.CalfL_Bone" rotation
+
+$sectionframes 30 120
 
 // ----------------------------------------------------------------
 
-$animation "generic_interaction_yaw_blend_c" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 0
-$animation "generic_interaction_yaw_blend_n" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 0 subtract "generic_interaction_yaw_blend_c" 0
-$animation "generic_interaction_yaw_blend_ne" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 315 subtract "generic_interaction_yaw_blend_c" 0
-$animation "generic_interaction_yaw_blend_e" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 270 subtract "generic_interaction_yaw_blend_c" 0
-$animation "generic_interaction_yaw_blend_se" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 225 subtract "generic_interaction_yaw_blend_c" 0
-$animation "generic_interaction_yaw_blend_s" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 180 subtract "generic_interaction_yaw_blend_c" 0
-$animation "generic_interaction_yaw_blend_sw" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 135 subtract "generic_interaction_yaw_blend_c" 0
-$animation "generic_interaction_yaw_blend_w" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 90 subtract "generic_interaction_yaw_blend_c" 0
-$animation "generic_interaction_yaw_blend_nw" "ez2_headcrab_classic_anims\ragdoll.smd" angles 0 0 45 subtract "generic_interaction_yaw_blend_c" 0
-
-$sequence "generic_interaction_yaw_blend_layer" {
-	"generic_interaction_yaw_blend_s"
-	"generic_interaction_yaw_blend_se"
-	"generic_interaction_yaw_blend_e"
-	"generic_interaction_yaw_blend_ne"
-	"generic_interaction_yaw_blend_n"
-	"generic_interaction_yaw_blend_nw"
-	"generic_interaction_yaw_blend_w"
-	"generic_interaction_yaw_blend_sw"
-	"generic_interaction_yaw_blend_s"
-	fps 24
-	blend "interaction_relative_yaw" -180 180
-	blendwidth 9
-	//walkframe 15 LZ
-	delta
+$sequence "ragdoll" {
+	"ez2_headcrab_classic_anims\ragdoll.smd"
+	activity "ACT_DIERAGDOLL" 1
+	fadein 0.2
+	fadeout 0.2
+	fps 30
 }
 
 // ----------------------------------------------------------------
 
-$sequence "bullsquid_snatch_prey" {
-	"ez2_headcrab_classic_anims\bullsquid_snatch_prey.dmx"
-	{ event AE_CL_PLAYSOUND 6 "NPC_HeadCrab.Pain" }
-	fps 24 angles 90 0 0
-	blendlayer "generic_interaction_yaw_blend_layer" 0 20 47 47 spline
-	//walkframe 15 LZ
-}
-
-// ----------------------------------------------------------------
-
-$animation "bullsquid_pounce_prey_blend_n" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 0
-$animation "bullsquid_pounce_prey_blend_ne" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 315
-$animation "bullsquid_pounce_prey_blend_e" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 270
-$animation "bullsquid_pounce_prey_blend_se" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 225
-$animation "bullsquid_pounce_prey_blend_s" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 180
-$animation "bullsquid_pounce_prey_blend_sw" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 135
-$animation "bullsquid_pounce_prey_blend_w" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 90
-$animation "bullsquid_pounce_prey_blend_nw" "ez2_headcrab_classic_anims\bullsquid_pounce_prey.dmx" fps 24 angles 90 0 45
-
-$sequence "bullsquid_pounce_prey_blend_idle_layer" {
-	"ez2_headcrab_classic_anims/ragdoll.smd"
-	fps 24 noanimation numframes 65
-	blendlayer "IdleB" 0 0 0 12
-	hidden
-}
-
-//$poseparameter interaction_relative_yaw -180 180 wrap
-
-$sequence "bullsquid_pounce_prey" {
-	"bullsquid_pounce_prey_blend_n"
-	"bullsquid_pounce_prey_blend_nw"
-	"bullsquid_pounce_prey_blend_w"
-	"bullsquid_pounce_prey_blend_sw"
-	"bullsquid_pounce_prey_blend_s"
-	"bullsquid_pounce_prey_blend_se"
-	"bullsquid_pounce_prey_blend_e"
-	"bullsquid_pounce_prey_blend_ne"
-	"bullsquid_pounce_prey_blend_n"
-	{ event AE_CL_PLAYSOUND 6 "NPC_HeadCrab.Pain" }
-	fps 24
-	blendlayer "IdleB" 0 0 0 6 spline
-	blendlayer "bullsquid_pounce_prey_blend_idle_layer" -135 -90 0 0 poseparameter interaction_relative_yaw
-	blendlayer "bullsquid_pounce_prey_blend_idle_layer" 0 0 0 45 poseparameter interaction_relative_yaw
-	blend "interaction_relative_yaw" -180 180
-	blendwidth 9
-	//walkframe 15 LZ
-}
+$include "ez2_headcrab_classic_extra_anims_include.qci"

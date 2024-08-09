@@ -592,6 +592,8 @@ $KeyValues
 			"dont_teleport_at_end" "both"
 			//"their_healthfrac_commandable" "0.5"
 			"their_healthfrac" "<=0.5"
+			"healthfrac" ">=0.75" // Hurt gonomes will prefer eating before doing this one
+			"their_health" "<100"
 		}
 		"gonome_swallow_human" 
 		{
@@ -604,6 +606,7 @@ $KeyValues
 			"dont_teleport_at_end" "both"
 			//"their_healthfrac_commandable" "0.5"
 			"their_healthfrac" "<=0.5"
+			"their_health" "<100"
 		}
 		"gonome_swallow_babysquid" 
 		{
